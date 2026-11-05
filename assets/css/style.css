@@ -1,0 +1,932 @@
+:root {
+    /* ==============================
+       GRAFITE — FUNDOS
+    ============================== */
+    --color-bg: #111412;
+    --color-bg-secondary: #151916;
+    --color-bg-tertiary: #1B201D;
+    --color-bg-elevated: #202622;
+    --color-bg-overlay: #0B0E0C;
+  
+    /* ==============================
+       GRAFITE — SUPERFÍCIES E CARDS
+    ============================== */
+    --color-surface: #1D231F;
+    --color-surface-hover: #252D28;
+    --color-surface-active: #2B342E;
+    --color-surface-muted: #181D1A;
+  
+    /* ==============================
+       GRAFITE — BORDAS
+    ============================== */
+    --color-border: #343C36;
+    --color-border-subtle: #29312B;
+    --color-border-strong: #46534A;
+    --color-border-focus: #56E39F;
+  
+    /* ==============================
+       VERDE ESMERALDA — PRINCIPAL
+    ============================== */
+    --color-primary: #56E39F;
+    --color-primary-hover: #72ECB0;
+    --color-primary-active: #35C982;
+    --color-primary-light: #A3F5C9;
+    --color-primary-dark: #239B62;
+    --color-primary-deep: #183B2B;
+  
+    /* ==============================
+       VERDE — FUNDOS E DESTAQUES
+    ============================== */
+    --color-green-soft: #233D30;
+    --color-green-muted: #2D5942;
+    --color-green-bright: #7CF0B5;
+    --color-green-neon: #A3E635;
+    --color-green-teal: #34D399;
+  
+    /* ==============================
+       TEXTOS
+    ============================== */
+    --color-text: #F2F5F2;
+    --color-text-secondary: #B0BBB3;
+    --color-text-muted: #849087;
+    --color-text-disabled: #626C65;
+    --color-text-inverse: #102218;
+  
+    /* ==============================
+       ESTADOS
+    ============================== */
+    --color-success: #56E39F;
+    --color-warning: #F5C76B;
+    --color-error: #F87171;
+    --color-info: #67C7F5;
+  
+    /* ==============================
+       OVERLAYS E EFEITOS
+    ============================== */
+    --color-overlay: rgb(0 0 0 / 60%);
+    --color-glass: rgb(29 35 31 / 75%);
+    --color-glow: rgb(86 227 159 / 18%);
+    --color-shadow: rgb(0 0 0 / 25%);
+  
+    /* ==============================
+       GRADIENTES
+    ============================== */
+    --gradient-primary: linear-gradient(
+      135deg,
+      #56E39F 0%,
+      #34D399 50%,
+      #239B62 100%
+    );
+  
+    --gradient-dark: linear-gradient(
+      135deg,
+      #111412 0%,
+      #1D231F 55%,
+      #183B2B 100%
+    );
+  
+    --gradient-glow: radial-gradient(
+      circle at center,
+      rgb(86 227 159 / 18%) 0%,
+      transparent 70%
+    );
+  
+    /* ==============================
+       SOMBRAS
+    ============================== */
+    --shadow-sm: 0 2px 8px var(--color-shadow);
+    --shadow-md: 0 8px 24px var(--color-shadow);
+    --shadow-lg: 0 16px 48px var(--color-shadow);
+    --shadow-glow: 0 0 24px var(--color-glow);
+  
+    /* ==============================
+       RAIO DE BORDAS
+    ============================== */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+  
+    /* ==============================
+       TRANSIÇÕES
+    ============================== */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 400ms ease;
+}
+
+
+/* ==============================
+   CONFIGURAÇÕES GERAIS
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(100% - 40px, 1100px);
+    margin-inline: auto;
+}
+
+.eyebrow {
+    display: inline-block;
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+.header {
+    height: 76px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: rgb(17 20 18 / 90%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(15px);
+}
+
+.navbar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.brand img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.brand-highlight {
+    color: var(--color-primary);
+}
+
+.nav-link {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+}
+
+
+/* ==============================
+   HERO
+============================== */
+
+.hero {
+    min-height: 570px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 65px;
+    gap: 45px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: var(--color-primary);
+}
+
+.hero-description {
+    max-width: 490px;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 21px;
+    background: var(--gradient-primary);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 800;
+    transition: var(--transition-normal);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+}
+
+.hero-info {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+}
+
+
+/* HERO VISUAL */
+
+.hero-visual {
+    min-height: 240px;
+    background: var(--gradient-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.visual-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: var(--color-primary);
+    opacity: 0.14;
+    filter: blur(90px);
+    border-radius: 50%;
+}
+
+.hero-logo {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    position: relative;
+}
+
+.visual-caption {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    margin-top: 12px;
+    position: relative;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+
+/* ==============================
+   SOBRE O CURSO
+============================== */
+
+.about {
+    padding-block: 65px 90px;
+}
+
+.section-heading {
+    max-width: 620px;
+    margin-bottom: 35px;
+}
+
+.section-heading h2,
+.evaluation h2 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+}
+
+.section-heading p,
+.evaluation p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.feature-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    transition: var(--transition-normal);
+}
+
+.feature-card:hover {
+    border-color: var(--color-primary-dark);
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--color-green-soft);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.feature-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 9px;
+}
+
+.feature-card p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+
+/* ==============================
+   AULAS
+============================== */
+
+.lessons-section {
+    background: var(--color-bg-secondary);
+    padding-block: 75px;
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.lessons-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lesson-counter {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 13px 18px;
+    width: fit-content;
+}
+
+.lesson-counter strong {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.lesson-counter span {
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+}
+
+.lesson-list {
+    display: grid;
+    gap: 15px;
+}
+
+.lesson-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 23px;
+    transition: var(--transition-normal);
+}
+
+.lesson-card:hover {
+    border-color: var(--color-primary-dark);
+}
+
+.lesson-number {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    background: var(--color-green-soft);
+    color: var(--color-primary);
+    font-weight: 800;
+}
+
+.lesson-content {
+    flex: 1;
+}
+
+.lesson-label {
+    color: var(--color-primary);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.lesson-content h3 {
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin-block: 7px 10px;
+}
+
+.lesson-content p {
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+}
+
+.lesson-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.lesson-meta span {
+    color: var(--color-text-secondary);
+    background: var(--color-bg-tertiary);
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.68rem;
+}
+
+.btn-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px 15px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: var(--color-primary);
+}
+
+
+/* ==============================
+   AVALIAÇÃO
+============================== */
+
+.evaluation {
+    padding-block: 80px;
+}
+
+.evaluation-content {
+    background: var(--gradient-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 30px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.evaluation-content > * {
+    position: relative;
+    z-index: 1;
+}
+
+.evaluation-content p {
+    max-width: 500px;
+    margin-bottom: 25px;
+}
+
+.evaluation-decoration {
+    display: none;
+}
+
+.evaluation-circle {
+    width: 150px;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    background: var(--color-glow);
+}
+
+.evaluation-circle span {
+    color: var(--color-primary);
+    font-size: 5rem;
+    font-weight: 800;
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    border-top: 1px solid var(--color-border-subtle);
+    padding-block: 30px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.footer-content p,
+.copyright {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+============================== */
+
+@media (min-width: 600px) {
+
+    .hero-actions {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .hero-visual {
+        min-height: 300px;
+    }
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lesson-card {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .btn-secondary {
+        align-self: center;
+    }
+
+    .footer-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+}
+
+@media (min-width: 850px) {
+
+    .hero {
+        min-height: 600px;
+        flex-direction: row;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .hero-content {
+        flex: 1.2;
+    }
+
+    .hero-visual {
+        flex: 0.8;
+        min-height: 370px;
+    }
+
+    .hero-logo {
+        width: 240px;
+    }
+
+    .features {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lessons-heading {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .evaluation-content {
+        padding: 55px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .evaluation-decoration {
+        display: block;
+        position: absolute;
+        right: 12%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .evaluation-content {
+        padding-right: 250px;
+    }
+
+}
+
+/* ==============================
+   ANIMAÇÕES GERAIS
+============================== */
+
+/* Logo flutuando */
+.hero-logo {
+    animation: logoFloat 5s ease-in-out infinite;
+    transition: filter 0.4s ease;
+}
+
+.hero-logo:hover {
+    filter: drop-shadow(0 0 35px var(--color-primary));
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+
+/* Brilho do fundo */
+.visual-glow {
+    animation: glowPulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    from {
+        transform: scale(0.8);
+        opacity: 0.10;
+    }
+
+    to {
+        transform: scale(1.4);
+        opacity: 0.25;
+    }
+}
+
+
+/* Indicador de status */
+.status-dot {
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--color-primary);
+    }
+
+    50% {
+        box-shadow: 0 0 15px var(--color-primary);
+    }
+}
+
+
+/* ==============================
+   ANIMAÇÕES DOS CARDS
+============================== */
+
+.feature-card,
+.lesson-card {
+    animation: cardAppear 0.7s ease both;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.24s;
+}
+
+.lesson-card:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card,
+.lesson-card {
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.feature-card:hover,
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ==============================
+   DECORAÇÃO DA AVALIAÇÃO
+============================== */
+
+.evaluation-decoration {
+    width: 190px;
+    height: 190px;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.tech-symbol {
+    width: 100px;
+    height: 100px;
+    display: grid;
+    place-items: center;
+    border-radius: 28px;
+    background: var(--color-green-soft);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 0 35px var(--color-glow);
+    transform: rotate(-10deg);
+    animation: symbolFloat 4s ease-in-out infinite;
+}
+
+.tech-symbol span {
+    color: var(--color-primary);
+    font-size: 2rem;
+    font-weight: 800;
+    transform: rotate(10deg);
+}
+
+@keyframes symbolFloat {
+    0%, 100% {
+        transform: rotate(-10deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(-5deg) translateY(-9px);
+    }
+}
+
+
+/* Órbitas */
+.orbit {
+    position: absolute;
+    width: 155px;
+    height: 155px;
+    border: 1px solid var(--color-primary-dark);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.orbit-one {
+    animation: orbitRotate 12s linear infinite;
+}
+
+.orbit-two {
+    width: 180px;
+    height: 180px;
+    border-style: dashed;
+    opacity: 0.25;
+    animation: orbitRotate 20s linear infinite reverse;
+}
+
+@keyframes orbitRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Pequenos pontos */
+.tech-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 12px var(--color-primary);
+}
+
+.dot-one {
+    top: 12px;
+    right: 45px;
+}
+
+.dot-two {
+    bottom: 25px;
+    left: 15px;
+}
+
+.dot-three {
+    top: 50%;
+    right: 0;
+    width: 5px;
+    height: 5px;
+}
+
+
+/* ==============================
+   ACESSIBILIDADE
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 849px) {
+    .evaluation-decoration {
+        display: none;
+    }
+
+    .hero-logo {
+        animation-duration: 6s;
+    }
+}
