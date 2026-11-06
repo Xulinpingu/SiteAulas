@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+$logado = isset($_SESSION['user']);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -13,17 +22,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.ico">
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
 </head>
 
 <body>
     <header class="header">
         <nav class="navbar container">
-            <a href="index.php" class="brand">
-                <img src="../assets/imgs/logo.png" alt="Learn AI">
-                <span>Learn<span class="brand-highligth">AI</span></span>
-            </a>
+            <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; padding-right: 15px;">
+                <a href="index.php" class="brand">
+                    <img src="../assets/imgs/logo.png" alt="Learn AI">
+                    <span>Learn<span class="brand-highligth">AI</span></span>
+                </a>
 
-            <a href="#aulas" class="nav-link">Explorar aulas</a>
+                <a href="#aulas" class="nav-link">Explorar aulas</a>
+            </div>
+
+            <?php if (!$logado): ?>
+
+                <a href="login.php" class="btn-primary">Login</a>
+
+            <?php else: ?>
+
+                <div class="lesson-counter" onclick="ToggleLogout()" style="cursor: pointer;">
+                    <button class="username"><?= $_SESSION['user'] ?>  </button>  
+
+                    <div class="popup-conta hidden">
+                        <a href = '../actions/logout_action.php' " class="btn-secondary">logout <i class="ph ph-sign-out"></i></a>
+                    </div>
+                </div>
+
+            <?php endif; ?>
         </nav>
     </header>
 
@@ -44,7 +77,7 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#aulas" class="btn-primary">começar a aprender <span>→</span></a>
+                    <a href="#aulas" class="btn-primary">começar a aprender <i class="ph ph-arrow-right"></i></a>
 
                     <span class="hero-info">2 aulas</span>
                 </div>
@@ -151,7 +184,7 @@
                         </div>
 
                         <a href="aula1.php" class="btn-secondary">
-                            Acessar aula →
+                            Acessar aula <i class="ph ph-arrow-right"></i>
                         </a>
 
                     </article>
@@ -180,7 +213,7 @@
                         </div>
 
                         <a href="aula2.php" class="btn-secondary">
-                            Acessar aula →
+                            Acessar aula <i class="ph ph-arrow-right"></i>
                         </a>
 
                     </article>
@@ -207,7 +240,7 @@
                 </p>
 
                 <a href="prova.php" class="btn-primary">
-                    Acessar avaliação →
+                    Acessar avaliação <i class="ph ph-arrow-right"></i>
                 </a>
 
             </div>
@@ -249,5 +282,15 @@
 
     </footer>
 </body>
+
+<script>
+
+    const logout = document.querySelector(".popup-conta");
+
+    function ToggleLogout(){
+        logout.classList.toggle('hidden');
+    }
+
+</script>
 
 </html>

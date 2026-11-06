@@ -144,6 +144,10 @@ a {
     text-decoration: none;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     width: min(100% - 40px, 1100px);
     margin-inline: auto;
@@ -268,6 +272,33 @@ a {
     color: var(--color-primary);
 }
 
+.username {
+    anchor-name: --username;
+
+    border: none;
+    background: none;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.popup-conta {
+    position: absolute;
+    position-anchor: --username;
+
+    top: calc(anchor(--username bottom) + 20px);
+    left: calc(anchor(--username right, 0%) - 75px);
+}
+
+.popup-conta .btn-secondary {
+    background: rgba(98, 108, 101, 0.5);
+}
+
+.popup-conta .btn-secondary:hover {
+    background: var(--color-error);
+    border: var(--color-border);
+}
 
 /* ==============================
    HERO
@@ -330,6 +361,10 @@ a {
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-glow);
+}
+
+.btn-primary i {
+    font-size: 20px;
 }
 
 .hero-info {
@@ -589,12 +624,17 @@ a {
     border-color: var(--color-primary);
 }
 
+.btn-secondary i {
+    margin-left: 5px;
+}
+
 
 /* ==============================
    AVALIAÇÃO
 ============================== */
 
 .evaluation {
+    position: relative;
     padding-block: 80px;
 }
 
