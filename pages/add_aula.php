@@ -164,21 +164,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 
-<body>
+<body class="admin-page">
 
     <header class="header">
 
         <nav class="navbar container">
 
-            <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; padding-right: 15px;">
+            <div class="admin-navbar-left">
 
                 <a href="index.php" class="brand">
                     <img src="../assets/imgs/logo.png" alt="Learn AI">
-
-                    <span>
-                        Learn<span class="brand-highligth">AI</span>
-                    </span>
+                    <span>Learn<span class="brand-highlight">AI</span></span>
                 </a>
+
+                <a href="index.php#aulas" class="nav-link">Explorar aulas</a>
 
             </div>
 
@@ -213,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </header>
 
-    <main class="container">
+    <main class="admin-main">
 
         <section class="admin-form-section">
 
@@ -410,6 +409,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         });
 
+    </script>
+
+    <script>
+        function ToggleLogout() {
+            const popup = document.querySelector('.popup-conta');
+            if (popup) popup.classList.toggle('hidden');
+        }
     </script>
 
 </body>

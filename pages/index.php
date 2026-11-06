@@ -72,7 +72,7 @@ $admin = isset($_SESSION['admin']);
                 <span class="eyebrow">APRENDA NO SEU RITMO</span>
 
                 <h1>
-                    Descubra o munda da <span>Inteligência Artificial.</span>
+                    Descubra o mundo da <span>Inteligência Artificial.</span>
                 </h1>
 
                 <p class="hero-description">

@@ -1127,3 +1127,577 @@ body:has(.login-form){
         animation-duration: 6s;
     }
 }
+
+
+/* ==============================
+   ADICIONAR AULA — ÁREA ADMINISTRATIVA
+============================== */
+
+.admin-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    padding-block: 65px 85px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(86, 227, 159, 0.07), transparent 38%),
+        var(--color-bg);
+}
+
+.admin-form-section {
+    width: min(100%, 760px);
+    margin-inline: auto;
+    padding: 36px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.admin-form-section .section-heading {
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.admin-form-section .section-heading h2 {
+    font-size: clamp(1.8rem, 5vw, 2.35rem);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.admin-form-section .section-heading p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.admin-form {
+    display: grid;
+    gap: 22px;
+}
+
+.admin-form > div,
+.tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.admin-form label {
+    color: var(--color-text);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.admin-form input,
+.admin-form textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 15px;
+    color: var(--color-text);
+    font: inherit;
+    font-size: 0.88rem;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.admin-form textarea {
+    min-height: 125px;
+    resize: vertical;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-glow);
+}
+
+.tag-input-container {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.tag-input-container input {
+    flex: 1;
+    min-width: 0;
+}
+
+.tag-input-container button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 18px;
+    color: var(--color-text-inverse);
+    background: var(--color-primary);
+    border: 0;
+    border-radius: var(--radius-md);
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.tag-input-container button:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-1px);
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 6px 8px 6px 12px;
+    color: var(--color-primary-light);
+    background: var(--color-green-soft);
+    border: 1px solid var(--color-primary-dark);
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.tag-option button {
+    width: 21px;
+    height: 21px;
+    display: grid;
+    place-items: center;
+    color: var(--color-text);
+    background: rgba(0, 0, 0, 0.2);
+    border: 0;
+    border-radius: 50%;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.tag-option button:hover {
+    color: white;
+    background: var(--color-error);
+}
+
+.admin-form > .btn-primary {
+    width: fit-content;
+    min-width: 190px;
+    margin-top: 5px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.admin-form-section .alerta {
+    width: 100%;
+    margin: 0 0 22px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-tertiary);
+    color: var(--color-text);
+}
+
+.admin-form-section .alerta:has(+ .admin-form) {
+    text-align: left;
+}
+
+.admin-navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.admin-navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.admin-navbar-right .lesson-counter {
+    padding: 8px 13px;
+    border: 1px solid transparent;
+    background: transparent;
+}
+
+.admin-navbar-right .lesson-counter:hover {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+}
+
+@media (max-width: 600px) {
+    .admin-main {
+        padding-block: 35px 55px;
+    }
+
+    .admin-form-section {
+        padding: 25px 20px;
+        border-radius: var(--radius-lg);
+    }
+
+    .tag-input-container {
+        flex-direction: column;
+    }
+
+    .tag-input-container button {
+        min-height: 45px;
+    }
+
+    .admin-form > .btn-primary {
+        width: 100%;
+    }
+
+    .admin-navbar-left {
+        gap: 12px;
+    }
+
+    .admin-navbar-left .nav-link {
+        display: none;
+    }
+}
+
+/* Refinamento visual do formulário de adicionar aula */
+.admin-main {
+    display: block;
+    padding: 58px 24px 80px;
+}
+
+.admin-form-section {
+    width: min(100%, 720px);
+    margin: 0 auto 0 max(24px, calc((100% - 1100px) / 2 - 42px));
+    padding: 34px 38px 38px;
+    background: #1a211d;
+    border: 1px solid #303b34;
+    border-radius: 18px;
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .24);
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.admin-form-section,
+.admin-form-section * {
+    box-sizing: border-box;
+}
+
+.admin-form-section .section-heading {
+    margin-bottom: 28px;
+}
+
+.admin-form-section .section-heading h2 {
+    margin: 0 0 9px;
+    color: #f2f5f2;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: clamp(1.7rem, 3vw, 2.1rem);
+    font-weight: 750;
+    letter-spacing: -.7px;
+}
+
+.admin-form-section .section-heading p {
+    color: #aab6ad;
+    font-size: .92rem;
+    line-height: 1.65;
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.admin-form > div,
+.admin-form .tags-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.admin-form label {
+    display: block;
+    width: 100%;
+    color: #dce5de;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: .86rem;
+    font-weight: 650;
+    letter-spacing: .1px;
+}
+
+.admin-form input:not([type='checkbox']),
+.admin-form textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 13px 15px;
+    color: #edf4ef;
+    background: #121815;
+    border: 1px solid #354239;
+    border-radius: 9px;
+    outline: none;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    box-shadow: none;
+    transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.admin-form input:not([type='checkbox']) {
+    height: 49px;
+}
+
+.admin-form textarea {
+    min-height: 112px;
+    height: 112px;
+    resize: vertical;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: #758279;
+    opacity: 1;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+    background: #151d18;
+    border-color: #56e39f;
+    box-shadow: 0 0 0 3px rgba(86, 227, 159, .12);
+}
+
+.admin-form .tag-input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+}
+
+.admin-form .tag-input-container input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.admin-form .tag-input-container button {
+    min-height: 49px;
+    padding: 0 17px;
+    border-radius: 9px;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: .84rem;
+    font-weight: 650;
+}
+
+.admin-form .tag-option {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: .8rem;
+}
+
+.admin-form > .btn-primary {
+    min-height: 48px;
+    min-width: 185px;
+    margin-top: 3px;
+    padding: 0 22px;
+    border-radius: 9px;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .admin-form-section {
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-main {
+        padding: 30px 16px 50px;
+    }
+
+    .admin-form-section {
+        padding: 25px 20px 28px;
+        border-radius: 14px;
+    }
+
+    .admin-form .tag-input-container {
+        flex-direction: column;
+    }
+
+    .admin-form .tag-input-container button {
+        width: 100%;
+    }
+}
+
+
+/* Ajuste final: formulário centralizado e compacto para caber na tela */
+@media (min-width: 768px) {
+    html:has(body.admin-page),
+    body.admin-page {
+        height: 100%;
+        min-height: 100%;
+        overflow: hidden;
+    }
+
+    body.admin-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    body.admin-page > .header,
+    body.admin-page > header {
+        flex: 0 0 76px;
+    }
+
+    body.admin-page .admin-main {
+        flex: 1 1 auto;
+        min-height: 0;
+        height: calc(100vh - 76px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 24px;
+        overflow: hidden;
+    }
+
+    body.admin-page .admin-form-section {
+        width: min(100%, 650px);
+        max-height: 100%;
+        margin: 0 auto;
+        padding: 22px 30px 24px;
+        border-radius: 16px;
+        overflow: visible;
+    }
+
+    body.admin-page .admin-form-section .section-heading {
+        margin-bottom: 17px;
+    }
+
+    body.admin-page .admin-form-section .section-heading h2 {
+        margin-bottom: 6px;
+        font-size: 1.75rem;
+    }
+
+    body.admin-page .admin-form-section .section-heading p {
+        font-size: .84rem;
+        line-height: 1.45;
+    }
+
+    body.admin-page .admin-form {
+        gap: 12px;
+    }
+
+    body.admin-page .admin-form > div,
+    body.admin-page .admin-form .tags-container {
+        gap: 5px;
+    }
+
+    body.admin-page .admin-form label {
+        font-size: .8rem;
+    }
+
+    body.admin-page .admin-form input:not([type='checkbox']),
+    body.admin-page .admin-form textarea {
+        padding: 9px 12px;
+        font-size: .85rem;
+        border-radius: 8px;
+    }
+
+    body.admin-page .admin-form input:not([type='checkbox']) {
+        height: 40px;
+    }
+
+    body.admin-page .admin-form textarea {
+        height: 72px;
+        min-height: 72px;
+        resize: none;
+    }
+
+    body.admin-page .admin-form .tag-input-container {
+        gap: 8px;
+    }
+
+    body.admin-page .admin-form .tag-input-container button {
+        min-height: 40px;
+        padding-inline: 14px;
+    }
+
+    body.admin-page .admin-form .tag-option {
+        padding: 4px 7px 4px 10px;
+        font-size: .74rem;
+    }
+
+    body.admin-page .admin-form > .btn-primary {
+        min-height: 42px;
+        min-width: 165px;
+        margin-top: 1px;
+        font-size: .84rem;
+    }
+
+    body.admin-page .admin-form-section .alerta {
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        font-size: .82rem;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 768px) {
+    body.admin-page .admin-form-section {
+        padding: 16px 26px 18px;
+    }
+
+    body.admin-page .admin-form-section .section-heading {
+        margin-bottom: 12px;
+    }
+
+    body.admin-page .admin-form-section .section-heading h2 {
+        font-size: 1.5rem;
+    }
+
+    body.admin-page .admin-form {
+        gap: 9px;
+    }
+
+    body.admin-page .admin-form textarea {
+        height: 58px;
+        min-height: 58px;
+    }
+}
+
+@media (max-width: 767px) {
+    body.admin-page {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    body.admin-page .admin-main {
+        display: flex;
+        justify-content: center;
+        padding: 28px 16px 36px;
+    }
+
+    body.admin-page .admin-form-section {
+        width: min(100%, 650px);
+        margin: 0 auto;
+        padding: 23px 20px;
+    }
+}
