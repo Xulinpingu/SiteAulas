@@ -287,15 +287,26 @@ a {
     position: absolute;
     position-anchor: --username;
 
-    top: calc(anchor(--username bottom) + 20px);
-    left: calc(anchor(--username right, 0%) - 75px);
+    position-area: center;
+    
+    margin-top: 67px;
+}
+
+.popup-conta .btn-top{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.popup-conta .btn-bottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .popup-conta .btn-secondary {
     background: rgba(98, 108, 101, 0.5);
 }
 
-.popup-conta .btn-secondary:hover {
+.popup-conta .btn-red:hover {
     background: var(--color-error);
     border: var(--color-border);
 }

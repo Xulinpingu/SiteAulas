@@ -3,6 +3,7 @@
 session_start();
 
 $logado = isset($_SESSION['user']);
+$admin = isset($_SESSION['admin']);
 
 ?>
 
@@ -52,7 +53,11 @@ $logado = isset($_SESSION['user']);
                     <button class="username"><?= $_SESSION['user'] ?>  </button>  
 
                     <div class="popup-conta hidden">
-                        <a href = '../actions/logout_action.php' " class="btn-secondary">logout <i class="ph ph-sign-out"></i></a>
+                        <a href = '../actions/logout_action.php' class="btn-secondary btn-red <?= $admin ? "btn-top" : "" ?>">Logout <i class="ph ph-sign-out"></i></a>
+
+                        <?php if ($admin): ?>
+                            <a href="add_aula.php" class="btn-secondary btn-bottom">Criar Aula</a>
+                        <?php endif; ?>
                     </div>
                 </div>
 

@@ -27,7 +27,7 @@ CREATE TABLE subtitulos(
 
     id_subtitulo INT AUTO_INCREMENT PRIMARY KEY,
     id_conteudo INT NOT NULL,
-
+    
     titulo VARCHAR(150) NOT NULL,
     conteudo TEXT NOT NULL,
     ordem INT NOT NULL,
@@ -36,6 +36,33 @@ CREATE TABLE subtitulos(
         REFERENCES conteudos(id_conteudo)
         ON DELETE CASCADE
 
+);
+
+CREATE TABLE card_aulas (
+    id_card INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    num_aula INT NOT NULL,
+    descricao VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE tag (
+    id_tag INT AUTO_INCREMENT PRIMARY KEY,
+    tag VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE aula_tag (
+    id_card INT NOT NULL,
+    id_tag INT NOT NULL,
+
+    PRIMARY KEY (id_card, id_tag),
+
+    FOREIGN KEY (id_card)
+        REFERENCES card_aulas(id_card)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (id_tag)
+        REFERENCES tag(id_tag)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE perguntas(
