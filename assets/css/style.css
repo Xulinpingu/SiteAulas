@@ -2054,6 +2054,15 @@ body:has(.login-form) {
     line-height: 1.8;
 }
 
+.prova-cabecalho #timer {
+    background: var(--color-primary-dark);
+    color: var(--color-text-inverse);
+
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
 
 /* ==========================================================================
    INÍCIO: prova final, quiz por aula e histórico
@@ -2176,10 +2185,11 @@ body:has(.login-form) {
     z-index: 5;
 
     margin-bottom: 40px;
-    padding: 14px 0;
+    padding: 14px 10px;
 
-    background: rgb(17 20 18 / 92%);
+    background: var(--color-bg-overlay);
     border-bottom: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
     backdrop-filter: blur(12px);
 }
 

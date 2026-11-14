@@ -14,7 +14,7 @@ CREATE TABLE card_aulas (
     id_card INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
     num_aula INT NOT NULL,
-    descricao VARCHAR(100) NOT NULL
+    descricao VARCHAR(500) NOT NULL
 );
 
 CREATE TABLE tag (

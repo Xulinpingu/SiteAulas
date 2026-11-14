@@ -124,7 +124,9 @@ $markdown = !$erro_banco && $tela !== 'inicio';
 $page_js = !$erro_banco && $tela === 'questoes' ? ['prova'] : [];
 
 require __DIR__ . '/../includes/head.php';
-require __DIR__ . '/../includes/header.php';
+if ($tela != 'questoes') {
+    require __DIR__ . '/../includes/header.php';
+}
 
 ?>
 
