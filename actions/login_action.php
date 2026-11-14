@@ -1,32 +1,37 @@
 <?php
 
-session_start();
-
+require_once __DIR__ . '/../includes/bootstrap.php';
 require_once __DIR__ . '/../config/connDB.php';
 
-$user = $_POST['username'] ?? '';
-$senha = $_POST['password'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: ../pages/login.php");
+    exit;
+}
 
-$sql = "SELECT senha, id_usuario FROM usuarios 
-        WHERE nome = :nome";
-$stmt = $pdo->prepare($sql);
+$user = texto_limpo($_POST['username'] ?? '');
+$senha = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
 
-$stmt->execute([
-    ':nome' => $user
-]);
+$stmt = $pdo->prepare("SELECT id_usuario, senha FROM usuarios WHERE nome = :nome");
+$stmt->execute([':nome' => $user]);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($result && password_verify($senha, $result["senha"])) {
+if ($result && password_verify($senha, $result['senha'])) {
+    // Novo id de sessão a cada login (evita fixação de sessão)
+    session_regenerate_id(true);
+
     $_SESSION['user'] = $user;
-    if ($result["id_usuario"] == 1){
+    $_SESSION['id_usuario'] = (int) $result['id_usuario'];
+
+    // O usuário de id 1 é o administrador
+    if ((int) $result['id_usuario'] === 1) {
         $_SESSION['admin'] = true;
     }
 
     header("Location: ../pages/index.php");
-
-} else {
-    $_SESSION['aviso'] = "Usuário ou senha incorretos.";
-    $_SESSION['aviso_tipo'] = "danger";
-    
-    header("Location: ../pages/login.php");
+    exit;
 }
+
+definir_aviso("Usuário ou senha incorretos.");
+
+header("Location: ../pages/login.php");
+exit;

@@ -1,125 +1,108 @@
+/* ==========================================================================
+   LEARN AI — style.css
+
+   ÍNDICE (procure pelos títulos abaixo)
+   1. base.css        tokens (cores, raios, sombras), reset, utilitários, acessibilidade
+   2. components.css  botões, alertas, título de seção, contador, tags e estado vazio
+   3. layout.css      header, menu do usuário, footer
+   4. home.css        página inicial (hero, sobre, aulas, avaliação) e animações
+   5. auth.css        login e cadastro
+   6. admin.css       páginas administrativas (adicionar aula e adicionar pergunta)
+   7. aula.css        página de uma aula (leitura, quiz e navegação entre aulas)
+   8. markdown.css    texto em Markdown renderizado (aulas e provas)
+   9. prova.css       provas e quizzes (início, questões e resultado)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   TOKENS (variáveis)
+   ========================================================================== */
+
 :root {
-    /* ==============================
-       GRAFITE — FUNDOS
-    ============================== */
+    /* Fundos */
     --color-bg: #111412;
     --color-bg-secondary: #151916;
     --color-bg-tertiary: #1B201D;
     --color-bg-elevated: #202622;
     --color-bg-overlay: #0B0E0C;
-  
-    /* ==============================
-       GRAFITE — SUPERFÍCIES E CARDS
-    ============================== */
+
+    /* Superfícies e cards */
     --color-surface: #1D231F;
     --color-surface-hover: #252D28;
     --color-surface-active: #2B342E;
     --color-surface-muted: #181D1A;
-  
-    /* ==============================
-       GRAFITE — BORDAS
-    ============================== */
+
+    /* Bordas */
     --color-border: #343C36;
     --color-border-subtle: #29312B;
     --color-border-strong: #46534A;
     --color-border-focus: #56E39F;
-  
-    /* ==============================
-       VERDE ESMERALDA — PRINCIPAL
-    ============================== */
+
+    /* Verde esmeralda — principal */
     --color-primary: #56E39F;
     --color-primary-hover: #72ECB0;
     --color-primary-active: #35C982;
     --color-primary-light: #A3F5C9;
     --color-primary-dark: #239B62;
     --color-primary-deep: #183B2B;
-  
-    /* ==============================
-       VERDE — FUNDOS E DESTAQUES
-    ============================== */
+
+    /* Verde — fundos e destaques */
     --color-green-soft: #233D30;
     --color-green-muted: #2D5942;
     --color-green-bright: #7CF0B5;
     --color-green-neon: #A3E635;
     --color-green-teal: #34D399;
-  
-    /* ==============================
-       TEXTOS
-    ============================== */
+
+    /* Textos */
     --color-text: #F2F5F2;
     --color-text-secondary: #B0BBB3;
     --color-text-muted: #849087;
     --color-text-disabled: #626C65;
     --color-text-inverse: #102218;
-  
-    /* ==============================
-       ESTADOS
-    ============================== */
+
+    /* Estados */
     --color-success: #56E39F;
     --color-warning: #F5C76B;
     --color-error: #F87171;
     --color-info: #67C7F5;
-  
-    /* ==============================
-       OVERLAYS E EFEITOS
-    ============================== */
+
+    /* Overlays e efeitos */
     --color-overlay: rgb(0 0 0 / 60%);
     --color-glass: rgb(29 35 31 / 75%);
     --color-glow: rgb(86 227 159 / 18%);
     --color-shadow: rgb(0 0 0 / 25%);
-  
-    /* ==============================
-       GRADIENTES
-    ============================== */
-    --gradient-primary: linear-gradient(
-      135deg,
-      #56E39F 0%,
-      #34D399 50%,
-      #239B62 100%
-    );
-  
-    --gradient-dark: linear-gradient(
-      135deg,
-      #111412 0%,
-      #1D231F 55%,
-      #183B2B 100%
-    );
-  
-    --gradient-glow: radial-gradient(
-      circle at center,
-      rgb(86 227 159 / 18%) 0%,
-      transparent 70%
-    );
-  
-    /* ==============================
-       SOMBRAS
-    ============================== */
+
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, #56E39F 0%, #34D399 50%, #239B62 100%);
+    --gradient-dark: linear-gradient(135deg, #111412 0%, #1D231F 55%, #183B2B 100%);
+    --gradient-glow: radial-gradient(circle at center, rgb(86 227 159 / 18%) 0%, transparent 70%);
+
+    /* Sombras */
     --shadow-sm: 0 2px 8px var(--color-shadow);
     --shadow-md: 0 8px 24px var(--color-shadow);
     --shadow-lg: 0 16px 48px var(--color-shadow);
     --shadow-glow: 0 0 24px var(--color-glow);
-  
-    /* ==============================
-       RAIO DE BORDAS
-    ============================== */
+
+    /* Raio de borda */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
     --radius-xl: 24px;
     --radius-full: 9999px;
-  
-    /* ==============================
-       TRANSIÇÕES
-    ============================== */
+
+    /* Transições */
     --transition-fast: 150ms ease;
     --transition-normal: 250ms ease;
     --transition-slow: 400ms ease;
+
+    /* Layout */
+    --header-height: 76px;
 }
 
 
-/* ==============================
-   CONFIGURAÇÕES GERAIS
-============================== */
+/* ==========================================================================
+   BASE
+   ========================================================================== */
 
 * {
     margin: 0;
@@ -144,6 +127,22 @@ a {
     text-decoration: none;
 }
 
+/* Remove as setinhas dos inputs numéricos */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+/* ==========================================================================
+   UTILITÁRIOS
+   ========================================================================== */
+
 .hidden {
     display: none;
 }
@@ -162,6 +161,77 @@ a {
     margin-bottom: 16px;
 }
 
+
+/* ==========================================================================
+   ACESSIBILIDADE
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ==========================================================================
+   components.css — peças reutilizáveis
+   Botões, alertas, título de seção, contador e tags/estado vazio das aulas.
+   ========================================================================== */
+
+/* ---------- Botões ---------- */
+
+.btn-primary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 21px;
+    background: var(--gradient-primary);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 800;
+    transition: var(--transition-normal);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-primary i {
+    font-size: 20px;
+}
+
+.btn-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px 15px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary i {
+    margin-left: 5px;
+}
+
 .back-btn {
     position: absolute;
     top: 20px;
@@ -171,21 +241,18 @@ a {
     width: 50px;
     height: 50px;
 
-    font-size: 1.4rem;  
-
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-size: 1.4rem;
+    color: var(--color-text);
 
     background-color: var(--color-bg-elevated);
     border: 2px solid var(--color-border);
     border-radius: 50%;
 
-    color: var(--color-text);
-    text-decoration: none;
-
     cursor: pointer;
-
     transition: border-color 0.2s ease, transform 0.15s ease;
 }
 
@@ -194,45 +261,155 @@ a {
     transform: translateX(-2px);
 }
 
+/* ---------- Alertas ---------- */
+
 .alerta {
+    width: 90%;
+    margin: 10px 5%;
+    padding: 10px;
+
     text-align: center;
     font-size: 15px;
-
-    width: 90%;
-    padding: 10px;
     border-radius: 10px;
-
-    margin: 10px 5%;
-}
-
-.danger {
-    background-color: #ff6b6b4d;
-    color: var(--loss);
-}
-
-.success {
-    background-color: #026130;
-    color: var(--profit);
 }
 
 .alerta p {
     width: 100%;
-
     text-align: center;
 }
 
+.alerta.danger {
+    background-color: #ff6b6b4d;
+}
 
-/* ==============================
-   HEADER
-============================== */
+.alerta.success {
+    background-color: #026130;
+}
+
+/* Saída suave dos avisos de sucesso (a altura é fixada em px pelo JS) */
+.alerta {
+    transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease, padding 0.4s ease;
+}
+
+.alerta--saindo {
+    max-height: 0 !important;
+    margin-block: 0 !important;
+    padding-block: 0 !important;
+    overflow: hidden;
+    opacity: 0;
+}
+
+/* ---------- Título de seção ---------- */
+
+.section-heading {
+    max-width: 620px;
+    margin-bottom: 35px;
+}
+
+.section-heading h2,
+.evaluation h2 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+}
+
+.section-heading p,
+.evaluation p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* ---------- Contador (também usado como botão do usuário no header) ---------- */
+
+.lesson-counter {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 13px 18px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.lesson-counter strong {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.lesson-counter span {
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+}
+
+
+/* ==========================================================================
+   Aulas: tags e estado vazio (usados na home, na aula e nas provas)
+   ========================================================================== */
+
+.lesson-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.lesson-meta span {
+    padding: 5px 10px;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: 0.68rem;
+}
+
+/* Estado vazio (nenhuma aula cadastrada ou erro ao carregar) */
+.lesson-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 24px;
+
+    text-align: center;
+    background: var(--color-surface);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+}
+
+.lesson-empty h3 {
+    font-size: 1.05rem;
+}
+
+.lesson-empty p {
+    max-width: 420px;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+
+.lesson-empty .btn-primary {
+    margin-top: 10px;
+}
+
+
+/* ==========================================================================
+   layout.css — header, menu do usuário e footer
+   ========================================================================== */
+
+/* ---------- Header ---------- */
 
 .header {
-    height: 76px;
-    border-bottom: 1px solid var(--color-border-subtle);
-    background: rgb(17 20 18 / 90%);
     position: sticky;
     top: 0;
     z-index: 10;
+
+    height: var(--header-height);
+
+    background: rgb(17 20 18 / 90%);
+    border-bottom: 1px solid var(--color-border-subtle);
     backdrop-filter: blur(15px);
 }
 
@@ -241,6 +418,20 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+/* Agrupa logo + link de navegação */
+.navbar-group {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+/* Variação da home: o link fica na ponta oposta ao logo */
+.navbar-group--spread {
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 15px;
 }
 
 .brand {
@@ -261,6 +452,12 @@ a {
     color: var(--color-primary);
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 .nav-link {
     color: var(--color-text-secondary);
     font-size: 0.85rem;
@@ -272,38 +469,44 @@ a {
     color: var(--color-primary);
 }
 
+/* ---------- Menu do usuário ---------- */
+
+.user-menu {
+    cursor: pointer;
+}
+
 .username {
     anchor-name: --username;
 
-    border: none;
-    background: none;
-
     color: white;
-
+    background: none;
+    border: none;
     cursor: pointer;
 }
 
 .popup-conta {
     position: absolute;
     position-anchor: --username;
-
     position-area: center;
-    
     margin-top: 67px;
-}
-
-.popup-conta .btn-top{
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.popup-conta .btn-bottom{
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
 
 .popup-conta .btn-secondary {
     background: rgba(98, 108, 101, 0.5);
+}
+
+.popup-conta .btn-top {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.popup-conta .btn-mid {
+    border-radius: 0;
+}
+
+.popup-conta .btn-bottom {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .popup-conta .btn-red:hover {
@@ -311,17 +514,58 @@ a {
     border: var(--color-border);
 }
 
-/* ==============================
-   HERO
-============================== */
+/* ---------- Footer ---------- */
+
+.footer {
+    padding-block: 30px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.footer-content p,
+.copyright {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+}
+
+@media (min-width: 600px) {
+    .footer-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        display: none;
+    }
+
+    .navbar-group {
+        gap: 12px;
+    }
+}
+
+
+/* ==========================================================================
+   home.css — página inicial (hero, sobre, aulas, avaliação) e suas animações
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
 
 .hero {
     min-height: 570px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-block: 65px;
     gap: 45px;
+    padding-block: 65px;
 }
 
 .hero-content {
@@ -355,48 +599,24 @@ a {
     margin-top: 30px;
 }
 
-.btn-primary {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    padding: 14px 21px;
-    background: var(--gradient-primary);
-    color: var(--color-text-inverse);
-    border-radius: var(--radius-md);
-    font-size: 0.88rem;
-    font-weight: 800;
-    transition: var(--transition-normal);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-glow);
-}
-
-.btn-primary i {
-    font-size: 20px;
-}
-
 .hero-info {
     color: var(--color-text-muted);
     font-size: 0.8rem;
 }
 
-
-/* HERO VISUAL */
-
 .hero-visual {
+    position: relative;
     min-height: 240px;
-    background: var(--gradient-dark);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
     overflow: hidden;
+
+    background: var(--gradient-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
 }
 
 .visual-glow {
@@ -410,20 +630,20 @@ a {
 }
 
 .hero-logo {
+    position: relative;
     width: 220px;
     height: 220px;
     object-fit: contain;
-    position: relative;
 }
 
 .visual-caption {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 9px;
+    margin-top: 12px;
     color: var(--color-text-secondary);
     font-size: 0.75rem;
-    margin-top: 12px;
-    position: relative;
 }
 
 .status-dot {
@@ -434,377 +654,7 @@ a {
     box-shadow: 0 0 10px var(--color-primary);
 }
 
-
-/* ==============================
-   SOBRE O CURSO
-============================== */
-
-.about {
-    padding-block: 65px 90px;
-}
-
-.section-heading {
-    max-width: 620px;
-    margin-bottom: 35px;
-}
-
-.section-heading h2,
-.evaluation h2 {
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
-    line-height: 1.2;
-    letter-spacing: -1px;
-    margin-bottom: 14px;
-}
-
-.section-heading p,
-.evaluation p {
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-}
-
-.feature-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    transition: var(--transition-normal);
-}
-
-.feature-card:hover {
-    border-color: var(--color-primary-dark);
-    transform: translateY(-4px);
-}
-
-.feature-icon {
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-md);
-    background: var(--color-green-soft);
-    color: var(--color-primary);
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-bottom: 22px;
-}
-
-.feature-card h3 {
-    font-size: 1.05rem;
-    margin-bottom: 9px;
-}
-
-.feature-card p {
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
-    line-height: 1.8;
-}
-
-
-/* ==============================
-   AULAS
-============================== */
-
-.lessons-section {
-    background: var(--color-bg-secondary);
-    padding-block: 75px;
-    border-top: 1px solid var(--color-border-subtle);
-    border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.lessons-heading {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.lesson-counter {
-    display: flex;
-    flex-direction: column;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 13px 18px;
-    width: fit-content;
-}
-
-.lesson-counter strong {
-    color: var(--color-primary);
-    font-size: 1.5rem;
-    line-height: 1.2;
-}
-
-.lesson-counter span {
-    color: var(--color-text-muted);
-    font-size: 0.7rem;
-}
-
-.lesson-list {
-    display: grid;
-    gap: 15px;
-}
-
-.lesson-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 23px;
-    transition: var(--transition-normal);
-}
-
-.lesson-card:hover {
-    border-color: var(--color-primary-dark);
-}
-
-.lesson-number {
-    width: 46px;
-    height: 46px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    border-radius: var(--radius-md);
-    background: var(--color-green-soft);
-    color: var(--color-primary);
-    font-weight: 800;
-}
-
-.lesson-content {
-    flex: 1;
-}
-
-.lesson-label {
-    color: var(--color-primary);
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-}
-
-.lesson-content h3 {
-    font-size: 1.05rem;
-    line-height: 1.4;
-    margin-block: 7px 10px;
-}
-
-.lesson-content p {
-    color: var(--color-text-muted);
-    font-size: 0.82rem;
-    line-height: 1.7;
-}
-
-.lesson-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-}
-
-.lesson-meta span {
-    color: var(--color-text-secondary);
-    background: var(--color-bg-tertiary);
-    padding: 5px 10px;
-    border-radius: var(--radius-full);
-    font-size: 0.68rem;
-}
-
-.btn-secondary {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 11px 15px;
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-md);
-    color: var(--color-text);
-    font-size: 0.8rem;
-    font-weight: 700;
-    transition: var(--transition-fast);
-    white-space: nowrap;
-}
-
-.btn-secondary:hover {
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
-    border-color: var(--color-primary);
-}
-
-.btn-secondary i {
-    margin-left: 5px;
-}
-
-
-/* ==============================
-   AVALIAÇÃO
-============================== */
-
-.evaluation {
-    position: relative;
-    padding-block: 80px;
-}
-
-.evaluation-content {
-    background: var(--gradient-dark);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: 30px 24px;
-    position: relative;
-    overflow: hidden;
-}
-
-.evaluation-content > * {
-    position: relative;
-    z-index: 1;
-}
-
-.evaluation-content p {
-    max-width: 500px;
-    margin-bottom: 25px;
-}
-
-.evaluation-decoration {
-    display: none;
-}
-
-.evaluation-circle {
-    width: 150px;
-    height: 150px;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--color-primary);
-    border-radius: 50%;
-    background: var(--color-glow);
-}
-
-.evaluation-circle span {
-    color: var(--color-primary);
-    font-size: 5rem;
-    font-weight: 800;
-}
-
-
-/* ==============================
-   FOOTER
-============================== */
-
-.footer {
-    border-top: 1px solid var(--color-border-subtle);
-    padding-block: 30px;
-}
-
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-}
-
-.footer-content p,
-.copyright {
-    color: var(--color-text-muted);
-    font-size: 0.75rem;
-}
-
-/* ==============================
-   LOGIN E CADASTRO
-============================== */
-body:has(.login-form){
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.login-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-
-    padding: 30px;
-    width: 500px;
-}
-
-.login-form h2{
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.login-form div{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-
-    width: 100%;
-}
-
-.login-form input{
-    width: 100%;
-    padding: 10px;
-
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-
-    background: var(--color-bg-tertiary);
-    color: var(--color-text);
-}
-
-.login-form button{
-    padding: 10px;
-    width: 100%;
-
-    font-size: 1rem;
-
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
-
-    border: none;
-    border-radius: var(--radius-md);
-
-    cursor: pointer;
-
-    transition: var(--transition-fast);
-}
-
-.login-form button:hover{
-    background: var(--color-primary-hover);
-}
-
-.login-form button:active{
-    transform: translateY(1px);
-}
-
-.login-form span{
-    font-size: 0.8rem;
-    color: var(--color-text-secondary);
-}
-
-.login-form a{
-    color: var(--color-primary);
-    font-weight: 600;
-}
-
-.login-form a:hover{
-    text-decoration: underline;
-}
-
-/* ==============================
-   RESPONSIVIDADE
-============================== */
-
 @media (min-width: 600px) {
-
     .hero-actions {
         flex-direction: row;
         align-items: center;
@@ -813,30 +663,9 @@ body:has(.login-form){
     .hero-visual {
         min-height: 300px;
     }
-
-    .features {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .lesson-card {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .btn-secondary {
-        align-self: center;
-    }
-
-    .footer-content {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
 }
 
 @media (min-width: 850px) {
-
     .hero {
         min-height: 600px;
         flex-direction: row;
@@ -856,157 +685,194 @@ body:has(.login-form){
     .hero-logo {
         width: 240px;
     }
+}
 
+/* ---------- Sobre o curso ---------- */
+
+.about {
+    padding-block: 65px 90px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.feature-card {
+    padding: 25px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 22px;
+
+    color: var(--color-primary);
+    background: var(--color-green-soft);
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.feature-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 9px;
+}
+
+.feature-card p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+@media (min-width: 600px) {
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 850px) {
     .features {
         grid-template-columns: repeat(3, 1fr);
     }
+}
 
+/* ---------- Aulas (cards) ---------- */
+
+.lessons-section {
+    padding-block: 75px;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.lessons-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lesson-list {
+    display: grid;
+    gap: 15px;
+}
+
+.lesson-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 23px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.lesson-card:hover {
+    border-color: var(--color-primary-dark);
+}
+
+.lesson-number {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+
+    color: var(--color-primary);
+    background: var(--color-green-soft);
+    border-radius: var(--radius-md);
+    font-weight: 800;
+}
+
+.lesson-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.lesson-label {
+    color: var(--color-primary);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.lesson-content h3 {
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin-block: 7px 10px;
+    overflow-wrap: anywhere;
+}
+
+.lesson-content p {
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+
+@media (min-width: 600px) {
+    .lesson-card {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .lesson-card .btn-secondary {
+        align-self: center;
+    }
+}
+
+@media (min-width: 850px) {
     .lessons-heading {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
-
-    .evaluation-content {
-        padding: 55px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .evaluation-decoration {
-        display: block;
-        position: absolute;
-        right: 12%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .evaluation-content {
-        padding-right: 250px;
-    }
-
 }
 
-/* ==============================
-   ANIMAÇÕES GERAIS
-============================== */
+/* ---------- Avaliação ---------- */
 
-/* Logo flutuando */
-.hero-logo {
-    animation: logoFloat 5s ease-in-out infinite;
-    transition: filter 0.4s ease;
+.evaluation {
+    position: relative;
+    padding-block: 80px;
 }
 
-.hero-logo:hover {
-    filter: drop-shadow(0 0 35px var(--color-primary));
+.evaluation-content {
+    position: relative;
+    padding: 30px 24px;
+    overflow: hidden;
+
+    background: var(--gradient-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
 }
 
-@keyframes logoFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-12px);
-    }
+.evaluation-content > * {
+    position: relative;
+    z-index: 1;
 }
 
-
-/* Brilho do fundo */
-.visual-glow {
-    animation: glowPulse 5s ease-in-out infinite alternate;
+.evaluation-content p {
+    max-width: 500px;
+    margin-bottom: 25px;
 }
 
-@keyframes glowPulse {
-    from {
-        transform: scale(0.8);
-        opacity: 0.10;
-    }
-
-    to {
-        transform: scale(1.4);
-        opacity: 0.25;
-    }
-}
-
-
-/* Indicador de status */
-.status-dot {
-    animation: statusPulse 2s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-    0%, 100% {
-        box-shadow: 0 0 5px var(--color-primary);
-    }
-
-    50% {
-        box-shadow: 0 0 15px var(--color-primary);
-    }
-}
-
-
-/* ==============================
-   ANIMAÇÕES DOS CARDS
-============================== */
-
-.feature-card,
-.lesson-card {
-    animation: cardAppear 0.7s ease both;
-}
-
-.feature-card:nth-child(2) {
-    animation-delay: 0.12s;
-}
-
-.feature-card:nth-child(3) {
-    animation-delay: 0.24s;
-}
-
-.lesson-card:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-@keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.feature-card,
-.lesson-card {
-    transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-.feature-card:hover,
-.lesson-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
-}
-
-
-/* ==============================
-   DECORAÇÃO DA AVALIAÇÃO
-============================== */
-
+/* Decoração (escondida no mobile) */
 .evaluation-decoration {
-    width: 190px;
-    height: 190px;
-    display: grid;
-    place-items: center;
+    display: none;
     position: absolute;
     right: 8%;
     top: 50%;
+    width: 190px;
+    height: 190px;
+    place-items: center;
     transform: translateY(-50%);
 }
 
@@ -1015,12 +881,12 @@ body:has(.login-form){
     height: 100px;
     display: grid;
     place-items: center;
-    border-radius: 28px;
+
     background: var(--color-green-soft);
     border: 1px solid var(--color-primary);
+    border-radius: 28px;
     box-shadow: 0 0 35px var(--color-glow);
     transform: rotate(-10deg);
-    animation: symbolFloat 4s ease-in-out infinite;
 }
 
 .tech-symbol span {
@@ -1030,18 +896,6 @@ body:has(.login-form){
     transform: rotate(10deg);
 }
 
-@keyframes symbolFloat {
-    0%, 100% {
-        transform: rotate(-10deg) translateY(0);
-    }
-
-    50% {
-        transform: rotate(-5deg) translateY(-9px);
-    }
-}
-
-
-/* Órbitas */
 .orbit {
     position: absolute;
     width: 155px;
@@ -1051,26 +905,13 @@ body:has(.login-form){
     opacity: 0.5;
 }
 
-.orbit-one {
-    animation: orbitRotate 12s linear infinite;
-}
-
 .orbit-two {
     width: 180px;
     height: 180px;
     border-style: dashed;
     opacity: 0.25;
-    animation: orbitRotate 20s linear infinite reverse;
 }
 
-@keyframes orbitRotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* Pequenos pontos */
 .tech-dot {
     position: absolute;
     width: 8px;
@@ -1097,144 +938,372 @@ body:has(.login-form){
     height: 5px;
 }
 
+@media (min-width: 850px) {
+    .evaluation-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 55px 250px 55px 55px;
+    }
 
-/* ==============================
-   ACESSIBILIDADE
-============================== */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+    .evaluation-decoration {
+        display: grid;
     }
 }
 
 
-/* ==============================
-   MOBILE
-============================== */
+/* ==========================================================================
+   ANIMAÇÕES DA HOME
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+
+.hero-logo {
+    animation: logoFloat 5s ease-in-out infinite;
+    transition: filter 0.4s ease;
+}
+
+.hero-logo:hover {
+    filter: drop-shadow(0 0 35px var(--color-primary));
+}
+
+.visual-glow {
+    animation: glowPulse 5s ease-in-out infinite alternate;
+}
+
+.status-dot {
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+@keyframes glowPulse {
+    from { transform: scale(0.8); opacity: 0.10; }
+    to   { transform: scale(1.4); opacity: 0.25; }
+}
+
+@keyframes statusPulse {
+    0%, 100% { box-shadow: 0 0 5px var(--color-primary); }
+    50%      { box-shadow: 0 0 15px var(--color-primary); }
+}
+
+/* ---------- Cards ----------
+   fill-mode "backwards" (e não "both"): com "both" o estado final da
+   animação ficava travado e o translateY do :hover nunca funcionava. */
+
+.feature-card,
+.lesson-card {
+    animation: cardAppear 0.7s ease backwards;
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.feature-card:hover,
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+.feature-card:hover {
+    border-color: var(--color-primary-dark);
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.24s;
+}
+
+/* O PHP define --i em cada card (0, 1, 2...); o atraso para em 0.6s */
+.lesson-card {
+    animation-delay: min(calc(var(--i, 0) * 0.12s), 0.6s);
+}
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Decoração da avaliação ---------- */
+
+.tech-symbol {
+    animation: symbolFloat 4s ease-in-out infinite;
+}
+
+.orbit-one {
+    animation: orbitRotate 12s linear infinite;
+}
+
+.orbit-two {
+    animation: orbitRotate 20s linear infinite reverse;
+}
+
+@keyframes symbolFloat {
+    0%, 100% { transform: rotate(-10deg) translateY(0); }
+    50%      { transform: rotate(-5deg) translateY(-9px); }
+}
+
+@keyframes orbitRotate {
+    to { transform: rotate(360deg); }
+}
 
 @media (max-width: 849px) {
-    .evaluation-decoration {
-        display: none;
-    }
-
     .hero-logo {
         animation-duration: 6s;
     }
 }
 
 
-/* ==============================
-   ADICIONAR AULA — ÁREA ADMINISTRATIVA
-============================== */
+/* ==========================================================================
+   auth.css — login e cadastro
+   ========================================================================== */
+
+body:has(.login-form) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    width: 500px;
+    padding: 30px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.login-form h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.login-form div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100%;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+
+    color: var(--color-text);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+
+    font-size: 1rem;
+    color: var(--color-text-inverse);
+    background: var(--color-primary);
+
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.login-form button:hover {
+    background: var(--color-primary-hover);
+}
+
+.login-form button:active {
+    transform: translateY(1px);
+}
+
+.login-form span {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.login-form a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   admin.css — páginas administrativas (adicionar aula e adicionar pergunta)
+   Mobile primeiro. As páginas rolam normalmente: os formulários crescem com o conteúdo.
+   ========================================================================== */
 
 .admin-page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 .admin-main {
     flex: 1;
     display: flex;
+    justify-content: center;
     align-items: flex-start;
-    padding-block: 65px 85px;
+    padding: 28px 16px 36px;
+
     background:
         radial-gradient(circle at 50% 0%, rgba(86, 227, 159, 0.07), transparent 38%),
         var(--color-bg);
 }
 
 .admin-form-section {
+    --field-bg: #121815;
+    --field-border: #354239;
+
     width: min(100%, 760px);
     margin-inline: auto;
-    padding: 36px;
+    padding: 25px 20px 28px;
+
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
+    border-radius: 14px;
+    box-shadow: 0 14px 38px rgb(0 0 0 / 24%);
 }
 
 .admin-form-section .section-heading {
     max-width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 .admin-form-section .section-heading h2 {
-    font-size: clamp(1.8rem, 5vw, 2.35rem);
-    line-height: 1.2;
-    letter-spacing: -1px;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
+    font-size: clamp(1.7rem, 3vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.7px;
 }
 
 .admin-form-section .section-heading p {
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.8;
+    font-size: 0.92rem;
+    line-height: 1.65;
 }
 
+.admin-form-section .alerta {
+    width: 100%;
+    margin: 0 0 22px;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+/* ---------- Formulário ---------- */
+
 .admin-form {
-    display: grid;
-    gap: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
 }
 
 .admin-form > div,
-.tags-container {
+.admin-form .tags-container {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
     min-width: 0;
 }
 
 .admin-form label {
-    color: var(--color-text);
-    font-size: 0.82rem;
-    font-weight: 700;
+    display: block;
+    width: 100%;
+    color: #dce5de;
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.1px;
 }
 
 .admin-form input,
 .admin-form textarea {
+    display: block;
     width: 100%;
-    min-height: 48px;
+    max-width: 100%;
     padding: 13px 15px;
-    color: var(--color-text);
+
+    color: #edf4ef;
     font: inherit;
-    font-size: 0.88rem;
-    background: var(--color-bg-tertiary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    line-height: 1.5;
+
+    background: var(--field-bg);
+    border: 1px solid var(--field-border);
+    border-radius: 9px;
     outline: none;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.admin-form input {
+    height: 49px;
 }
 
 .admin-form textarea {
-    min-height: 125px;
+    height: 112px;
+    min-height: 112px;
     resize: vertical;
 }
 
 .admin-form input::placeholder,
 .admin-form textarea::placeholder {
-    color: var(--color-text-muted);
+    color: #758279;
+    opacity: 1;
 }
 
 .admin-form input:focus,
 .admin-form textarea:focus {
+    background: #151d18;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px var(--color-glow);
+    box-shadow: 0 0 0 3px rgba(86, 227, 159, 0.12);
 }
+
+.admin-form > .btn-primary {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 3px;
+    padding: 0 22px;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+/* ---------- Tags ---------- */
 
 .tag-input-container {
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     gap: 10px;
+    width: 100%;
 }
 
 .tag-input-container input {
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
 }
 
@@ -1243,14 +1312,18 @@ body:has(.login-form){
     align-items: center;
     justify-content: center;
     gap: 7px;
-    padding: 0 18px;
+    width: 100%;
+    min-height: 49px;
+    padding: 0 17px;
+
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 600;
     color: var(--color-text-inverse);
+
     background: var(--color-primary);
     border: 0;
-    border-radius: var(--radius-md);
-    font: inherit;
-    font-size: 0.82rem;
-    font-weight: 800;
+    border-radius: 9px;
     cursor: pointer;
     transition: var(--transition-fast);
 }
@@ -1271,12 +1344,14 @@ body:has(.login-form){
     align-items: center;
     gap: 9px;
     padding: 6px 8px 6px 12px;
+
     color: var(--color-primary-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+
     background: var(--color-green-soft);
     border: 1px solid var(--color-primary-dark);
     border-radius: var(--radius-full);
-    font-size: 0.78rem;
-    font-weight: 600;
 }
 
 .tag-option button {
@@ -1284,12 +1359,14 @@ body:has(.login-form){
     height: 21px;
     display: grid;
     place-items: center;
+
     color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1;
+
     background: rgba(0, 0, 0, 0.2);
     border: 0;
     border-radius: 50%;
-    font-size: 1rem;
-    line-height: 1;
     cursor: pointer;
     transition: var(--transition-fast);
 }
@@ -1299,405 +1376,1104 @@ body:has(.login-form){
     background: var(--color-error);
 }
 
-.admin-form > .btn-primary {
+/* ---------- Responsivo do admin ---------- */
+
+
+@media (min-width: 601px) {
+    .tag-input-container {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .tag-input-container button {
+        width: auto;
+    }
+
+    .admin-form > .btn-primary {
+        width: fit-content;
+        min-width: 165px;
+    }
+}
+
+@media (min-width: 768px) {
+    .admin-main {
+        padding: 48px 24px 80px;
+    }
+
+    .admin-form-section {
+        padding: 34px 38px 38px;
+        border-radius: 18px;
+    }
+}
+
+/* ---------- Dica de campo ---------- */
+
+.field-hint {
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.field-hint code {
+    padding: 1px 6px;
+    color: var(--color-primary-light);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.9em;
+}
+
+/* ---------- Conteúdo da aula (editor de seções) ---------- */
+
+.admin-form > .form-block {
+    gap: 12px;
+    margin-top: 6px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.form-block-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.admin-form textarea.code-area {
+    height: 200px;
+    min-height: 120px;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     width: fit-content;
-    min-width: 190px;
-    margin-top: 5px;
+    padding: 10px 16px;
+
+    color: var(--color-text);
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 600;
+
+    background: transparent;
+    border: 1px dashed var(--color-border-strong);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-outline:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.section-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.section-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-item-header input {
+    flex: 1;
+    min-width: 0;
+}
+
+.section-number {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+
+    color: var(--color-primary);
+    background: var(--color-green-soft);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.section-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.icon-btn:hover:not(:disabled) {
+    color: var(--color-text);
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+}
+
+.icon-btn.danger:hover:not(:disabled) {
+    color: white;
+    background: var(--color-error);
+    border-color: var(--color-error);
+}
+
+.icon-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+
+/* ---------- Provas: escolha da aula ---------- */
+
+.admin-form select {
+    display: block;
+    width: 100%;
+    height: 49px;
+    padding: 0 15px;
+
+    color: #edf4ef;
+    font: inherit;
+    font-size: 0.9rem;
+
+    background: var(--field-bg);
+    border: 1px solid var(--field-border);
+    border-radius: 9px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.admin-form select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(86, 227, 159, 0.12);
+}
+
+.admin-form--escolha {
+    margin-bottom: 22px;
+}
+
+.admin-contexto {
+    margin-bottom: 22px;
+    padding: 12px 16px;
+
+    color: var(--color-text-secondary);
+    font-size: 0.86rem;
+
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+}
+
+.admin-contexto strong {
+    color: var(--color-text);
+}
+
+/* ---------- Provas: editor de alternativas ---------- */
+
+.alt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alt-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alt-item input[type="text"] {
+    flex: 1;
+    min-width: 0;
+}
+
+/* A letra é o botão de "alternativa correta" (o radio fica escondido por baixo) */
+.admin-form .alt-correta {
+    position: relative;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.admin-form .alt-correta input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.alt-letra {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 800;
+
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+    transition: var(--transition-fast);
+}
+
+.alt-correta input:checked + .alt-letra {
+    color: var(--color-text-inverse);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.alt-correta input:focus-visible + .alt-letra {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ---------- Provas: perguntas já cadastradas ---------- */
+
+.pergunta-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 38px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.pergunta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.pergunta-item-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pergunta-alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    list-style: none;
+    color: var(--color-text-secondary);
+    font-size: 0.88rem;
+}
+
+.pergunta-alternativas li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.pergunta-alternativas .letra {
+    width: 1.2em;
+    color: var(--color-text-muted);
+    font-weight: 800;
+}
+
+.pergunta-alternativas li.correta {
+    color: var(--color-primary-light);
+    font-weight: 600;
+}
+
+.pergunta-explicacao {
+    padding-left: 12px;
+    color: var(--color-text-muted);
+    font-size: 0.84rem;
+    border-left: 2px solid var(--color-border-strong);
+}
+
+
+/* ==========================================================================
+   aula.css — página de uma aula (leitura e navegação entre aulas)
+   ========================================================================== */
+
+/* Coluna de leitura centralizada, sem cards */
+.lesson-page {
+    width: min(100% - 40px, 740px);
+    margin-inline: auto;
+    padding-block: 45px 100px;
+}
+
+.lesson-page .alerta {
+    width: 100%;
+    margin: 0 0 28px;
+    text-align: left;
+}
+
+.lesson-back {
+    width: fit-content;
+    margin-bottom: 30px;
+}
+
+.lesson-back i {
+    margin: 0 6px 0 0;
+}
+
+.lesson-page-header {
+    margin-bottom: 48px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.lesson-page-header h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin-bottom: 14px;
+}
+
+.lesson-page-header p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.lesson-ref {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 18px;
+
+    color: var(--color-primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.lesson-ref:hover {
+    text-decoration: underline;
+}
+
+.lesson-article {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+.lesson-section > h2 {
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    letter-spacing: -0.7px;
+}
+
+/* Chamada para o quiz da aula */
+
+.lesson-quiz {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.lesson-quiz-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lesson-quiz-texto strong {
+    font-size: 1rem;
+}
+
+.lesson-quiz-texto span {
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+}
+
+/* Navegação entre aulas */
+
+.lesson-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 72px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.lesson-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    max-width: 100%;
+    padding: 14px 20px;
+
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+}
+
+.lesson-nav-link:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.lesson-nav-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.lesson-nav-title {
+    overflow: hidden;
+    color: var(--color-text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* "Próxima aula" é o botão principal; fica sempre à direita */
+.lesson-nav-next {
+    margin-left: auto;
+    text-align: right;
+    background: var(--gradient-primary);
+    border-color: transparent;
+}
+
+.lesson-nav-next:hover {
+    box-shadow: var(--shadow-glow);
+}
+
+.lesson-nav-next .lesson-nav-label {
+    justify-content: flex-end;
+    color: var(--color-text-inverse);
+    opacity: 0.75;
+}
+
+.lesson-nav-next .lesson-nav-title {
+    color: var(--color-text-inverse);
+}
+
+@media (max-width: 599px) {
+    .lesson-nav-link {
+        width: 100%;
+    }
+}
+
+
+/* ==========================================================================
+   markdown.css — texto em Markdown renderizado (aulas e provas)
+   ========================================================================== */
+
+.markdown code {
+    padding: 1px 6px;
+    color: var(--color-primary-light);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.9em;
+}
+
+/* Texto em Markdown renderizado */
+
+.markdown {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.85;
+    overflow-wrap: anywhere;
+}
+
+.markdown > * + * {
+    margin-top: 14px;
+}
+
+.markdown h3,
+.markdown h4 {
+    margin-top: 24px;
+    color: var(--color-text);
+    line-height: 1.4;
+}
+
+.markdown h3 {
+    font-size: 1.1rem;
+}
+
+.markdown h4 {
+    font-size: 1rem;
+}
+
+.markdown strong {
+    color: var(--color-text);
+}
+
+.markdown a {
+    color: var(--color-primary);
+}
+
+.markdown a:hover {
+    text-decoration: underline;
+}
+
+.markdown ul,
+.markdown ol {
+    padding-left: 24px;
+}
+
+.markdown li + li {
+    margin-top: 6px;
+}
+
+.markdown blockquote {
+    padding: 4px 0 4px 16px;
+    color: var(--color-text-secondary);
+    border-left: 3px solid var(--color-primary-dark);
+}
+
+.markdown pre {
+    padding: 16px;
+    overflow-x: auto;
+    background: var(--color-bg-overlay);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.markdown pre code {
+    padding: 0;
+    color: var(--color-text);
+    background: none;
+    font-size: inherit;
+}
+
+.markdown table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+.markdown th,
+.markdown td {
+    padding: 9px 14px;
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+.markdown th {
+    color: var(--color-text);
+    background: var(--color-bg-tertiary);
+}
+
+.markdown hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.markdown .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* ==========================================================================
+   prova.css — provas e quizzes (início, questões e resultado)
+   Mesma coluna de leitura da página da aula, sem cards.
+   ========================================================================== */
+
+.prova-page {
+    width: min(100% - 40px, 740px);
+    margin-inline: auto;
+    padding-block: 45px 100px;
+}
+
+.prova-page .alerta {
+    width: 100%;
+    margin: 0 0 28px;
+    text-align: left;
+}
+
+.prova-cabecalho {
+    margin-bottom: 40px;
+}
+
+.prova-cabecalho h1 {
+    margin-bottom: 12px;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+}
+
+.prova-cabecalho p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+
+/* ==========================================================================
+   INÍCIO: prova final, quiz por aula e histórico
+   ========================================================================== */
+
+.prova-bloco {
+    padding-block: 32px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.prova-bloco h2 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.prova-bloco > p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.prova-vazio {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.prova-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.prova-nota {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+}
+
+.prova-linhas {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    list-style: none;
+}
+
+.prova-linha {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.prova-linha-numero {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+
+    color: var(--color-primary);
+    background: var(--color-green-soft);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.prova-linha-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.prova-linha-info strong {
+    overflow: hidden;
+    font-size: 0.95rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.prova-linha-info span {
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+}
+
+.prova-linha-nota {
+    color: var(--color-warning);
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.prova-linha-nota--ok {
+    color: var(--color-primary);
+}
+
+@media (max-width: 599px) {
+    .prova-linha {
+        flex-wrap: wrap;
+    }
+
+    .prova-linha-nota {
+        order: 3;
+    }
+}
+
+
+/* ==========================================================================
+   QUESTÕES
+   ========================================================================== */
+
+/* Barra de progresso fixa logo abaixo do header */
+.prova-progresso {
+    position: sticky;
+    top: var(--header-height);
+    z-index: 5;
+
+    margin-bottom: 40px;
+    padding: 14px 0;
+
+    background: rgb(17 20 18 / 92%);
+    border-bottom: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(12px);
+}
+
+.prova-progresso-texto {
+    margin-bottom: 8px;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+}
+
+.prova-barra {
+    height: 6px;
+    overflow: hidden;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+}
+
+.prova-barra span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.prova-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    list-style: none;
+}
+
+.prova-questao-topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.prova-numero {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.prova-aula-tag {
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+}
+
+.prova-enunciado {
+    margin-bottom: 20px;
+    color: var(--color-text);
+    font-size: 1.05rem;
+}
+
+.prova-alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prova-alternativa {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.prova-alternativa:hover {
+    background: var(--color-surface-muted);
+    border-color: var(--color-border-strong);
+}
+
+/* O radio fica invisível, mas continua valendo para o "required" */
+.prova-alternativa input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.prova-letra {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 800;
+
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+    transition: var(--transition-fast);
+}
+
+.prova-alt-texto {
+    flex: 1;
+    min-width: 0;
+    padding-top: 3px;
+
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.prova-alternativa:has(input:checked) {
+    background: var(--color-green-soft);
+    border-color: var(--color-primary);
+}
+
+.prova-alternativa:has(input:checked) .prova-alt-texto {
+    color: var(--color-text);
+}
+
+.prova-alternativa input:checked + .prova-letra {
+    color: var(--color-text-inverse);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.prova-alternativa input:focus-visible + .prova-letra {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.prova-enviar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.prova-enviar button {
     border: 0;
     cursor: pointer;
     font-family: inherit;
 }
 
-.admin-form-section .alerta {
-    width: 100%;
-    margin: 0 0 22px;
-    padding: 12px 16px;
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-tertiary);
-    color: var(--color-text);
+.prova-enviar button:disabled {
+    opacity: 0.6;
+    cursor: default;
 }
 
-.admin-form-section .alerta:has(+ .admin-form) {
-    text-align: left;
+
+/* ==========================================================================
+   RESULTADO
+   ========================================================================== */
+
+.prova-resumo {
+    margin-bottom: 48px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--color-border-subtle);
 }
 
-.admin-navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 32px;
+.prova-resumo h1 {
+    margin-bottom: 8px;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
 }
 
-.admin-navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+.prova-percentual {
+    margin-bottom: 18px;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
 }
 
-.admin-navbar-right .lesson-counter {
-    padding: 8px 13px;
-    border: 1px solid transparent;
-    background: transparent;
-}
-
-.admin-navbar-right .lesson-counter:hover {
-    border-color: var(--color-border);
-    background: var(--color-surface);
-}
-
-@media (max-width: 600px) {
-    .admin-main {
-        padding-block: 35px 55px;
-    }
-
-    .admin-form-section {
-        padding: 25px 20px;
-        border-radius: var(--radius-lg);
-    }
-
-    .tag-input-container {
-        flex-direction: column;
-    }
-
-    .tag-input-container button {
-        min-height: 45px;
-    }
-
-    .admin-form > .btn-primary {
-        width: 100%;
-    }
-
-    .admin-navbar-left {
-        gap: 12px;
-    }
-
-    .admin-navbar-left .nav-link {
-        display: none;
-    }
-}
-
-/* Refinamento visual do formulário de adicionar aula */
-.admin-main {
-    display: block;
-    padding: 58px 24px 80px;
-}
-
-.admin-form-section {
-    width: min(100%, 720px);
-    margin: 0 auto 0 max(24px, calc((100% - 1100px) / 2 - 42px));
-    padding: 34px 38px 38px;
-    background: #1a211d;
-    border: 1px solid #303b34;
-    border-radius: 18px;
-    box-shadow: 0 14px 38px rgba(0, 0, 0, .24);
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-}
-
-.admin-form-section,
-.admin-form-section * {
-    box-sizing: border-box;
-}
-
-.admin-form-section .section-heading {
-    margin-bottom: 28px;
-}
-
-.admin-form-section .section-heading h2 {
-    margin: 0 0 9px;
-    color: #f2f5f2;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: clamp(1.7rem, 3vw, 2.1rem);
-    font-weight: 750;
-    letter-spacing: -.7px;
-}
-
-.admin-form-section .section-heading p {
-    color: #aab6ad;
-    font-size: .92rem;
-    line-height: 1.65;
-}
-
-.admin-form {
-    display: flex;
-    flex-direction: column;
-    gap: 21px;
-}
-
-.admin-form > div,
-.admin-form .tags-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-}
-
-.admin-form label {
-    display: block;
-    width: 100%;
-    color: #dce5de;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: .86rem;
-    font-weight: 650;
-    letter-spacing: .1px;
-}
-
-.admin-form input:not([type='checkbox']),
-.admin-form textarea {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 13px 15px;
-    color: #edf4ef;
-    background: #121815;
-    border: 1px solid #354239;
-    border-radius: 9px;
-    outline: none;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: .9rem;
-    font-weight: 400;
-    line-height: 1.5;
-    box-shadow: none;
-    transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
-}
-
-.admin-form input:not([type='checkbox']) {
-    height: 49px;
-}
-
-.admin-form textarea {
-    min-height: 112px;
-    height: 112px;
-    resize: vertical;
-}
-
-.admin-form input::placeholder,
-.admin-form textarea::placeholder {
-    color: #758279;
-    opacity: 1;
-}
-
-.admin-form input:focus,
-.admin-form textarea:focus {
-    background: #151d18;
-    border-color: #56e39f;
-    box-shadow: 0 0 0 3px rgba(86, 227, 159, .12);
-}
-
-.admin-form .tag-input-container {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    gap: 10px;
-    width: 100%;
-}
-
-.admin-form .tag-input-container input {
-    flex: 1 1 auto;
-    min-width: 0;
-}
-
-.admin-form .tag-input-container button {
-    min-height: 49px;
-    padding: 0 17px;
-    border-radius: 9px;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: .84rem;
-    font-weight: 650;
-}
-
-.admin-form .tag-option {
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: .8rem;
-}
-
-.admin-form > .btn-primary {
-    min-height: 48px;
-    min-width: 185px;
-    margin-top: 3px;
-    padding: 0 22px;
-    border-radius: 9px;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    font-size: .9rem;
+.prova-status {
+    color: var(--color-primary);
     font-weight: 700;
 }
 
-@media (max-width: 900px) {
-    .admin-form-section {
-        margin-inline: auto;
-    }
+.prova-status--abaixo {
+    color: var(--color-warning);
 }
 
-@media (max-width: 600px) {
-    .admin-main {
-        padding: 30px 16px 50px;
-    }
-
-    .admin-form-section {
-        padding: 25px 20px 28px;
-        border-radius: 14px;
-    }
-
-    .admin-form .tag-input-container {
-        flex-direction: column;
-    }
-
-    .admin-form .tag-input-container button {
-        width: 100%;
-    }
+.prova-resumo .prova-barra span {
+    min-width: 6px;
 }
 
-
-/* Ajuste final: formulário centralizado e compacto para caber na tela */
-@media (min-width: 768px) {
-    html:has(body.admin-page),
-    body.admin-page {
-        height: 100%;
-        min-height: 100%;
-        overflow: hidden;
-    }
-
-    body.admin-page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    body.admin-page > .header,
-    body.admin-page > header {
-        flex: 0 0 76px;
-    }
-
-    body.admin-page .admin-main {
-        flex: 1 1 auto;
-        min-height: 0;
-        height: calc(100vh - 76px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px 24px;
-        overflow: hidden;
-    }
-
-    body.admin-page .admin-form-section {
-        width: min(100%, 650px);
-        max-height: 100%;
-        margin: 0 auto;
-        padding: 22px 30px 24px;
-        border-radius: 16px;
-        overflow: visible;
-    }
-
-    body.admin-page .admin-form-section .section-heading {
-        margin-bottom: 17px;
-    }
-
-    body.admin-page .admin-form-section .section-heading h2 {
-        margin-bottom: 6px;
-        font-size: 1.75rem;
-    }
-
-    body.admin-page .admin-form-section .section-heading p {
-        font-size: .84rem;
-        line-height: 1.45;
-    }
-
-    body.admin-page .admin-form {
-        gap: 12px;
-    }
-
-    body.admin-page .admin-form > div,
-    body.admin-page .admin-form .tags-container {
-        gap: 5px;
-    }
-
-    body.admin-page .admin-form label {
-        font-size: .8rem;
-    }
-
-    body.admin-page .admin-form input:not([type='checkbox']),
-    body.admin-page .admin-form textarea {
-        padding: 9px 12px;
-        font-size: .85rem;
-        border-radius: 8px;
-    }
-
-    body.admin-page .admin-form input:not([type='checkbox']) {
-        height: 40px;
-    }
-
-    body.admin-page .admin-form textarea {
-        height: 72px;
-        min-height: 72px;
-        resize: none;
-    }
-
-    body.admin-page .admin-form .tag-input-container {
-        gap: 8px;
-    }
-
-    body.admin-page .admin-form .tag-input-container button {
-        min-height: 40px;
-        padding-inline: 14px;
-    }
-
-    body.admin-page .admin-form .tag-option {
-        padding: 4px 7px 4px 10px;
-        font-size: .74rem;
-    }
-
-    body.admin-page .admin-form > .btn-primary {
-        min-height: 42px;
-        min-width: 165px;
-        margin-top: 1px;
-        font-size: .84rem;
-    }
-
-    body.admin-page .admin-form-section .alerta {
-        margin-bottom: 12px;
-        padding: 8px 12px;
-        font-size: .82rem;
-    }
+.prova-meta {
+    margin-top: 14px;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
 }
 
-@media (max-height: 700px) and (min-width: 768px) {
-    body.admin-page .admin-form-section {
-        padding: 16px 26px 18px;
-    }
-
-    body.admin-page .admin-form-section .section-heading {
-        margin-bottom: 12px;
-    }
-
-    body.admin-page .admin-form-section .section-heading h2 {
-        font-size: 1.5rem;
-    }
-
-    body.admin-page .admin-form {
-        gap: 9px;
-    }
-
-    body.admin-page .admin-form textarea {
-        height: 58px;
-        min-height: 58px;
-    }
+.prova-resumo-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
 }
 
-@media (max-width: 767px) {
-    body.admin-page {
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
+/* Alternativas do gabarito (não clicáveis) */
+.prova-alternativa--resultado {
+    align-items: center;
+    cursor: default;
+}
 
-    body.admin-page .admin-main {
-        display: flex;
-        justify-content: center;
-        padding: 28px 16px 36px;
-    }
+.prova-alternativa--resultado:hover {
+    background: transparent;
+    border-color: var(--color-border);
+}
 
-    body.admin-page .admin-form-section {
-        width: min(100%, 650px);
-        margin: 0 auto;
-        padding: 23px 20px;
-    }
+.prova-alternativa--certa,
+.prova-alternativa--certa:hover {
+    background: var(--color-green-soft);
+    border-color: var(--color-primary-dark);
+}
+
+.prova-alternativa--certa .prova-letra {
+    color: var(--color-text-inverse);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.prova-alternativa--errada,
+.prova-alternativa--errada:hover {
+    background: rgb(248 113 113 / 10%);
+    border-color: var(--color-error);
+}
+
+.prova-alternativa--errada .prova-letra {
+    color: var(--color-bg);
+    background: var(--color-error);
+    border-color: var(--color-error);
+}
+
+.prova-alternativa--resultado .prova-alt-texto {
+    padding-top: 0;
+}
+
+.prova-selo {
+    flex-shrink: 0;
+    padding: 3px 9px;
+
+    color: var(--color-text-secondary);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+}
+
+.prova-selo--certa {
+    color: var(--color-primary);
+    background: var(--color-green-soft);
+}
+
+.prova-selo--errada {
+    color: var(--color-error);
+    background: rgb(248 113 113 / 12%);
+}
+
+.prova-explicacao {
+    margin-top: 18px;
+    padding: 2px 0 2px 16px;
+
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    border-left: 3px solid var(--color-primary-dark);
+}
+
+.prova-explicacao > strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.prova-explicacao .markdown {
+    font-size: 0.9rem;
+    line-height: 1.75;
 }

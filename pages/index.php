@@ -1,69 +1,28 @@
 <?php
 
-session_start();
+require_once __DIR__ . '/../includes/bootstrap.php';
+require_once __DIR__ . '/../config/connDB.php';
+require_once __DIR__ . '/../includes/aulas.php';
 
-$logado = isset($_SESSION['user']);
-$admin = isset($_SESSION['admin']);
+$aulas = [];
+$tags_por_aula = [];
+$erro_aulas = false;
+
+try {
+    [$aulas, $tags_por_aula] = listar_aulas($pdo);
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    $erro_aulas = true;
+}
+
+$total_aulas = count($aulas);
+
+$page_title = 'Learn AI | Aprenda Inteligência Artificial';
+
+require __DIR__ . '/../includes/head.php';
+require __DIR__ . '/../includes/header.php';
 
 ?>
-
-
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn AI | Aprenda Inteligência Artificial</title>
-
-    <link rel="stylesheet" href="../assets/css/style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="icon" type="image/png" href="../assets/imgs/favicon.ico">
-
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
-    />
-</head>
-
-<body>
-    <header class="header">
-        <nav class="navbar container">
-            <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; padding-right: 15px;">
-                <a href="index.php" class="brand">
-                    <img src="../assets/imgs/logo.png" alt="Learn AI">
-                    <span>Learn<span class="brand-highligth">AI</span></span>
-                </a>
-
-                <a href="#aulas" class="nav-link">Explorar aulas</a>
-            </div>
-
-            <?php if (!$logado): ?>
-
-                <a href="login.php" class="btn-primary">Login</a>
-
-            <?php else: ?>
-
-                <div class="lesson-counter" onclick="ToggleLogout()" style="cursor: pointer;">
-                    <button class="username"><?= $_SESSION['user'] ?>  </button>  
-
-                    <div class="popup-conta hidden">
-                        <a href = '../actions/logout_action.php' class="btn-secondary btn-red <?= $admin ? "btn-top" : "" ?>">Logout <i class="ph ph-sign-out"></i></a>
-
-                        <?php if ($admin): ?>
-                            <a href="add_aula.php" class="btn-secondary btn-bottom">Criar Aula</a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-            <?php endif; ?>
-        </nav>
-    </header>
 
     <main>
 
@@ -84,7 +43,7 @@ $admin = isset($_SESSION['admin']);
                 <div class="hero-actions">
                     <a href="#aulas" class="btn-primary">começar a aprender <i class="ph ph-arrow-right"></i></a>
 
-                    <span class="hero-info">2 aulas</span>
+                    <span class="hero-info"><?= $total_aulas ?> <?= $total_aulas === 1 ? 'aula' : 'aulas' ?></span>
                 </div>
 
             </div>
@@ -135,15 +94,12 @@ $admin = isset($_SESSION['admin']);
 
                 <article class="feature-card">
                     <div class="feature-icon">03</div>
-
                     <h3>Pratique</h3>
-
                     <p>
                         Teste seus conhecimentos através de
                         uma avaliação ao final do aprendizado.
                     </p>
                 </article>
-
             </div>
 
         </section>
@@ -161,67 +117,68 @@ $admin = isset($_SESSION['admin']);
                     </div>
 
                     <div class="lesson-counter">
-                        <strong>02</strong>
-                        <span>aulas disponíveis</span>
+                        <strong><?= str_pad($total_aulas, 2, '0', STR_PAD_LEFT) ?></strong>
+                        <span><?= $total_aulas === 1 ? 'aula disponível' : 'aulas disponíveis' ?></span>
                     </div>
                 </div>
 
                 <div class="lesson-list">
-                    <article class="lesson-card">
-                        <div class="lesson-number">01</div>
 
-                        <div class="lesson-content">
-                            <span class="lesson-label">AULA 01</span>
+                    <?php if ($erro_aulas): ?>
 
-                            <h3>Introdução à Inteligência Artificial</h3>
-
-                            <p>
-                                Descubra o que é inteligência artificial,
-                                sua história e como ela está presente
-                                no nosso cotidiano.
-                            </p>
-
-                            <div class="lesson-meta">
-                                <span>Fundamentos</span>
-                                <span>Iniciante</span>
-                            </div>
-
+                        <div class="lesson-empty">
+                            <h3>Não foi possível carregar as aulas</h3>
+                            <p>Ocorreu um erro ao buscar as aulas. Tente novamente em instantes.</p>
                         </div>
 
-                        <a href="aula1.php" class="btn-secondary">
-                            Acessar aula <i class="ph ph-arrow-right"></i>
-                        </a>
+                    <?php elseif (empty($aulas)): ?>
 
-                    </article>
+                        <div class="lesson-empty">
+                            <h3>Nenhuma aula cadastrada ainda</h3>
+                            <p>As aulas aparecerão aqui assim que forem publicadas.</p>
 
-                    <article class="lesson-card">
-
-                        <div class="lesson-number">02</div>
-
-                        <div class="lesson-content">
-
-                            <span class="lesson-label">AULA 02</span>
-
-                            <h3>Como as Inteligências Artificiais aprendem?</h3>
-
-                            <p>
-                                Conheça os conceitos de Machine Learning,
-                                redes neurais e o processo de aprendizagem
-                                das máquinas.
-                            </p>
-
-                            <div class="lesson-meta">
-                                <span>Machine Learning</span>
-                                <span>Iniciante</span>
-                            </div>
-
+                            <?php if ($admin): ?>
+                                <a href="add_aula.php" class="btn-primary">
+                                    Criar a primeira aula <i class="ph ph-plus"></i>
+                                </a>
+                            <?php endif; ?>
                         </div>
 
-                        <a href="aula2.php" class="btn-secondary">
-                            Acessar aula <i class="ph ph-arrow-right"></i>
-                        </a>
+                    <?php else: ?>
 
-                    </article>
+                        <?php foreach ($aulas as $i => $aula): ?>
+
+                            <?php $numero = str_pad($aula['num_aula'], 2, '0', STR_PAD_LEFT); ?>
+
+                            <article class="lesson-card" style="--i: <?= (int) $i ?>">
+
+                                <div class="lesson-number"><?= e($numero) ?></div>
+
+                                <div class="lesson-content">
+                                    <span class="lesson-label">AULA <?= e($numero) ?></span>
+
+                                    <h3><?= e($aula['title']) ?></h3>
+
+                                    <p><?= e($aula['descricao']) ?></p>
+
+                                    <?php if (!empty($tags_por_aula[$aula['id_card']])): ?>
+                                        <div class="lesson-meta">
+                                            <?php foreach ($tags_por_aula[$aula['id_card']] as $tag): ?>
+                                                <span><?= e($tag) ?></span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <a href="aula.php?id=<?= (int) $aula['id_card'] ?>" class="btn-secondary">
+                                    Acessar aula <i class="ph ph-arrow-right"></i>
+                                </a>
+
+                            </article>
+
+                        <?php endforeach; ?>
+
+                    <?php endif; ?>
 
                 </div>
 
@@ -235,9 +192,7 @@ $admin = isset($_SESSION['admin']);
 
                 <span class="eyebrow">ETAPA FINAL</span>
 
-                <h2>
-                    Está preparado para testar seus conhecimentos?
-                </h2>
+                <h2>Está preparado para testar seus conhecimentos?</h2>
 
                 <p>
                     Depois de estudar as aulas, faça a avaliação
@@ -266,36 +221,7 @@ $admin = isset($_SESSION['admin']);
 
     </main>
 
-    <footer class="footer">
+<?php
 
-        <div class="container footer-content">
-
-            <a href="index.php" class="brand">
-                <img src="../assets/imgs/logo.png" alt="">
-                <span>Learn<span class="brand-highlight">AI</span></span>
-            </a>
-
-            <p>
-                Aprenda hoje. Construa o amanhã.
-            </p>
-
-            <span class="copyright">
-                © 2026 Learn AI
-            </span>
-
-        </div>
-
-    </footer>
-</body>
-
-<script>
-
-    const logout = document.querySelector(".popup-conta");
-
-    function ToggleLogout(){
-        logout.classList.toggle('hidden');
-    }
-
-</script>
-
-</html>
+require __DIR__ . '/../includes/footer.php';
+require __DIR__ . '/../includes/scripts.php';

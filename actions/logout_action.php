@@ -2,8 +2,9 @@
 
 session_start();
 
-$_SESSION = array();
+$_SESSION = [];
 
 session_destroy();
 
 header("Location: ../pages/index.php");
+exit;
