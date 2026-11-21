@@ -9,7 +9,7 @@ $total_questoes = count($prova);
 
 ?>
         <header class="prova-cabecalho">
-            <span class="eyebrow">EM ANDAMENTO <div id="timer">00:00</div> </span>
+            <span class="eyebrow">EM ANDAMENTO</span>
 
             <h1><?= e($escopo_titulo) ?></h1>
 
@@ -25,6 +25,7 @@ $total_questoes = count($prova);
             <input type="hidden" name="token" value="<?= e($token) ?>">
 
             <div class="prova-progresso">
+                <div id="timer">00:00</div>
                 <div class="prova-progresso-texto">
                     <span data-progresso-texto>0 de <?= $total_questoes ?> respondidas</span>
                 </div>
@@ -103,12 +104,14 @@ $total_questoes = count($prova);
                     saiu++;
 
                     if (saiu === 1) {
+                        window.location.reload();
+
                         alert('Você saiu da aba do navegador. Por favor, não faça isso durante a prova, na próxima ocorrência terá sua prova cancelada.');
                     }
                     else if (saiu >= 2) {
                         cancelando = true;
 
-                        // Aguarda o usuário retornar à aba
+                        // Aguarda o usuário retornar
                         document.addEventListener('visibilitychange', function retornar() {
 
                             if (!document.hidden) {

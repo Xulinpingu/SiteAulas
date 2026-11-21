@@ -2193,6 +2193,19 @@ body:has(.login-form) {
     backdrop-filter: blur(12px);
 }
 
+#timer{
+    background-color: var(--color-primary-active);
+    color: var(--color-text-inverse);
+    font-weight: 600;
+
+    padding: 2px 10px;
+    margin-bottom: 8px;
+
+    border-radius: var(--radius-full);
+
+    display: inline-block;
+}
+
 .prova-progresso-texto {
     margin-bottom: 8px;
     color: var(--color-text-muted);
