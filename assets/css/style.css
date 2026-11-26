@@ -2363,6 +2363,37 @@ body:has(.login-form) {
     cursor: default;
 }
 
+/* Aviso de saída da aba (<dialog> aberto por assets/js/prova.js) */
+.prova-aviso-saida {
+    width: min(28rem, calc(100% - 32px));
+    padding: 28px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    box-shadow: var(--shadow-lg);
+}
+
+.prova-aviso-saida::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.prova-aviso-saida h2 {
+    margin: 0 0 8px;
+}
+
+.prova-aviso-saida p {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.prova-aviso-saida button {
+    margin-top: 20px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 
 /* ==========================================================================
    RESULTADO

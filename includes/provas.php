@@ -26,6 +26,12 @@ const PERGUNTAS_PROVA_GERAL = 20;
 /** Percentual mínimo de acertos para considerar a média atingida. */
 const MEDIA_APROVACAO = 70;
 
+/** Saídas da aba permitidas: a 1ª é só aviso; ao chegar neste número a prova é cancelada. */
+const PROVA_MAX_SAIDAS = 2;
+
+/** Folga (em segundos) entre o fim do tempo e o envio, para absorver latência de rede. */
+const PROVA_TOLERANCIA_SEGUNDOS = 60;
+
 
 /** "?,?,?" para usar em IN (...) com parâmetros posicionais. */
 function marcadores(int $quantidade): string
@@ -352,13 +358,30 @@ function carregar_prova(PDO $pdo, ?int $id_card): array
    enviar: assim ninguém escolhe responder só as questões que sabe.
    ========================================================================== */
 
-function registrar_prova_ativa(?int $id_card, array $ids_perguntas): string
+/** Tempo da prova em segundos: 15 min + 3 min por questão. */
+function duracao_prova(int $total_questoes): int
+{
+    return 900 + 180 * $total_questoes;
+}
+
+/**
+ * Guarda a prova sorteada na sessão (perguntas e alternativas já embaralhadas)
+ * junto com o relógio e as saídas de aba. Tudo isso vive no servidor: recarregar
+ * a página não sorteia outra prova, não reinicia o tempo e não zera as saídas.
+ */
+function registrar_prova_ativa(?int $id_card, string $titulo, array $prova): string
 {
     $token = bin2hex(random_bytes(8));
 
     $_SESSION['provas_ativas'][$token] = [
         'id_card' => $id_card,
-        'ids' => array_map('intval', $ids_perguntas),
+        'titulo' => $titulo,
+        'ids' => array_map('intval', array_column($prova, 'id_pergunta')),
+        'prova' => $prova,
+        'inicio' => time(),
+        'duracao' => duracao_prova(count($prova)),
+        'saidas' => 0,
+        'cancelada' => false,
     ];
 
     // Guarda só as últimas 5 provas abertas (várias abas, recarregamentos)
@@ -375,6 +398,52 @@ function obter_prova_ativa(string $token): ?array
 function encerrar_prova_ativa(string $token): void
 {
     unset($_SESSION['provas_ativas'][$token]);
+}
+
+/** Segundos que ainda restam na prova (0 se o tempo acabou). */
+function tempo_restante_prova(array $prova_ativa): int
+{
+    return max(0, $prova_ativa['inicio'] + $prova_ativa['duracao'] - time());
+}
+
+/** Estado da prova para o navegador, ou null se ela não existe mais. */
+function estado_prova_ativa(string $token): ?array
+{
+    $prova_ativa = obter_prova_ativa($token);
+
+    if ($prova_ativa === null) {
+        return null;
+    }
+
+    return [
+        'saidas' => $prova_ativa['saidas'],
+        'max' => PROVA_MAX_SAIDAS,
+        'cancelada' => $prova_ativa['cancelada'],
+        'restante' => tempo_restante_prova($prova_ativa),
+    ];
+}
+
+/**
+ * Registra uma saída da aba. Ao chegar em PROVA_MAX_SAIDAS a prova é marcada
+ * como cancelada (o envio passa a ser recusado em prova.php).
+ */
+function registrar_saida_prova(string $token): ?array
+{
+    $prova_ativa = obter_prova_ativa($token);
+
+    if ($prova_ativa === null) {
+        return null;
+    }
+
+    if (!$prova_ativa['cancelada']) {
+        $_SESSION['provas_ativas'][$token]['saidas']++;
+
+        if ($_SESSION['provas_ativas'][$token]['saidas'] >= PROVA_MAX_SAIDAS) {
+            $_SESSION['provas_ativas'][$token]['cancelada'] = true;
+        }
+    }
+
+    return estado_prova_ativa($token);
 }
 
 

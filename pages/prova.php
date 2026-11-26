@@ -22,6 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($prova_ativa['cancelada']) {
+        encerrar_prova_ativa($token);
+        definir_aviso('Essa prova foi cancelada porque você saiu da aba do navegador.');
+        header('Location: prova.php');
+        exit;
+    }
+
+    // O relógio é do servidor: o navegador não consegue "estender" a prova
+    if (time() > $prova_ativa['inicio'] + $prova_ativa['duracao'] + PROVA_TOLERANCIA_SEGUNDOS) {
+        encerrar_prova_ativa($token);
+        definir_aviso('O tempo da prova acabou antes do envio das respostas.');
+        header('Location: prova.php');
+        exit;
+    }
+
     $respostas = is_array($_POST['resp'] ?? null) ? $_POST['resp'] : [];
 
     try {
@@ -54,6 +69,7 @@ $total_geral = 0;
 $tentativas = [];
 $prova = [];
 $token = '';
+$restante = 0;
 $escopo_titulo = '';
 $resultado = null;
 
@@ -98,7 +114,42 @@ try {
             exit;
         }
 
-        $token = registrar_prova_ativa($id_card, array_column($prova, 'id_pergunta'));
+        $token = registrar_prova_ativa($id_card, $escopo_titulo, $prova);
+
+        // Redireciona para uma URL com o token: recarregar a página (F5) volta
+        // para a MESMA prova, com o mesmo relógio, em vez de sortear outra.
+        header('Location: prova.php?t=' . $token);
+        exit;
+
+    } elseif (isset($_GET['t'])) {
+
+        $token = texto_limpo($_GET['t']);
+        $prova_ativa = obter_prova_ativa($token);
+
+        if ($prova_ativa === null) {
+            definir_aviso('Essa prova não está mais disponível. Comece novamente.');
+            header('Location: prova.php');
+            exit;
+        }
+
+        if ($prova_ativa['cancelada']) {
+            encerrar_prova_ativa($token);
+            definir_aviso('Essa prova foi cancelada porque você saiu da aba do navegador.');
+            header('Location: prova.php');
+            exit;
+        }
+
+        $restante = tempo_restante_prova($prova_ativa);
+
+        if ($restante <= 0) {
+            encerrar_prova_ativa($token);
+            definir_aviso('O tempo dessa prova acabou.');
+            header('Location: prova.php');
+            exit;
+        }
+
+        $prova = $prova_ativa['prova'];
+        $escopo_titulo = $prova_ativa['titulo'];
         $tela = 'questoes';
 
     } else {
