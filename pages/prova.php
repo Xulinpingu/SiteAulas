@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $tela = 'inicio';             // inicio | questoes | resultado
 $erro_banco = false;
-$migracao_pendente = false;
 
 $aulas = [];
 $perguntas_por_aula = [];
@@ -163,8 +162,6 @@ try {
 } catch (PDOException $e) {
     error_log($e->getMessage());
     $erro_banco = true;
-    // 42S02 = tabela inexistente, 42S22 = coluna inexistente: faltou rodar a migração
-    $migracao_pendente = in_array($e->getCode(), ['42S02', '42S22'], true);
 }
 
 
@@ -189,14 +186,7 @@ if ($tela != 'questoes') {
 
             <div class="lesson-empty">
                 <h3>Não foi possível carregar as provas</h3>
-                <p>
-                    <?php if ($migracao_pendente): ?>
-                        O banco de dados precisa da migração
-                        <strong>database/migracao_02_provas.sql</strong>.
-                    <?php else: ?>
-                        Ocorreu um erro ao buscar as provas. Tente novamente em instantes.
-                    <?php endif; ?>
-                </p>
+                <p>Ocorreu um erro ao buscar as provas. Tente novamente em instantes.</p>
                 <a href="index.php" class="btn-secondary">Voltar ao início</a>
             </div>
 

@@ -7,7 +7,6 @@ require_once __DIR__ . '/../includes/aulas.php';
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $aula = null;
 $erro_banco = false;
-$migracao_pendente = false;
 
 if ($id) {
     try {
@@ -15,8 +14,6 @@ if ($id) {
     } catch (PDOException $e) {
         error_log($e->getMessage());
         $erro_banco = true;
-        // 42S22 = coluna inexistente: o banco ainda não recebeu a migração
-        $migracao_pendente = $e->getCode() === '42S22';
     }
 }
 
@@ -40,14 +37,7 @@ require __DIR__ . '/../includes/header.php';
 
             <div class="lesson-empty">
                 <h3>Não foi possível carregar a aula</h3>
-                <p>
-                    <?php if ($migracao_pendente): ?>
-                        O banco de dados precisa da migração
-                        <strong>database/migracao_01_conteudo_aulas.sql</strong>.
-                    <?php else: ?>
-                        Ocorreu um erro ao buscar a aula. Tente novamente em instantes.
-                    <?php endif; ?>
-                </p>
+                <p>Ocorreu um erro ao buscar a aula. Tente novamente em instantes.</p>
                 <a href="index.php#aulas" class="btn-secondary">Voltar às aulas</a>
             </div>
 

@@ -56,9 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } catch (PDOException $e) {
                 error_log($e->getMessage());
 
-                $erro = in_array($e->getCode(), ['42S02', '42S22'], true)
-                    ? 'O banco precisa da migração database/migracao_02_provas.sql.'
-                    : 'Erro ao cadastrar a pergunta. Verifique os dados e tente novamente.';
+                $erro = 'Erro ao cadastrar a pergunta. Verifique os dados e tente novamente.';
             }
         }
 
@@ -80,7 +78,6 @@ $contagem = [];
 $aula = null;
 $perguntas = [];
 $erro_banco = false;
-$migracao_pendente = false;
 
 try {
     [$aulas] = listar_aulas($pdo);
@@ -98,7 +95,6 @@ try {
 } catch (PDOException $e) {
     error_log($e->getMessage());
     $erro_banco = true;
-    $migracao_pendente = in_array($e->getCode(), ['42S02', '42S22'], true);
 }
 
 
@@ -133,13 +129,7 @@ require __DIR__ . '/../includes/header.php';
             <?php if ($erro_banco): ?>
 
                 <div class="alerta danger">
-                    <p>
-                        <?php if ($migracao_pendente): ?>
-                            O banco de dados precisa das migrações em database/ (migracao_01 e migracao_02).
-                        <?php else: ?>
-                            Ocorreu um erro ao carregar os dados. Tente novamente.
-                        <?php endif; ?>
-                    </p>
+                    <p>Ocorreu um erro ao carregar os dados. Tente novamente.</p>
                 </div>
 
             <?php elseif (empty($aulas)): ?>

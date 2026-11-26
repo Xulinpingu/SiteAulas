@@ -23,6 +23,9 @@ const MAX_ALTERNATIVAS = 6;
 /** Máximo de perguntas sorteadas na prova final (todas as aulas). */
 const PERGUNTAS_PROVA_GERAL = 20;
 
+/** Quantidade de perguntas em cada quiz individual. */
+const PERGUNTAS_PROVA_AULA = 15;
+
 /** Percentual mínimo de acertos para considerar a média atingida. */
 const MEDIA_APROVACAO = 70;
 
@@ -31,6 +34,9 @@ const PROVA_MAX_SAIDAS = 2;
 
 /** Folga (em segundos) entre o fim do tempo e o envio, para absorver latência de rede. */
 const PROVA_TOLERANCIA_SEGUNDOS = 60;
+
+/** Duração fixa de todas as provas: 30 minutos. */
+const DURACAO_PROVA_SEGUNDOS = 30 * 60;
 
 
 /** "?,?,?" para usar em IN (...) com parâmetros posicionais. */
@@ -344,8 +350,13 @@ function carregar_prova(PDO $pdo, ?int $id_card): array
 
     shuffle($prova);
 
+    // Prova final: até 20 questões.
     if ($id_card === null) {
         $prova = array_slice($prova, 0, PERGUNTAS_PROVA_GERAL);
+
+    // Quiz individual: até 15 questões.
+    } else {
+        $prova = array_slice($prova, 0, PERGUNTAS_PROVA_AULA);
     }
 
     return $prova;
@@ -358,10 +369,12 @@ function carregar_prova(PDO $pdo, ?int $id_card): array
    enviar: assim ninguém escolhe responder só as questões que sabe.
    ========================================================================== */
 
-/** Tempo da prova em segundos: 15 min + 3 min por questão. */
-function duracao_prova(int $total_questoes): int
+/**
+ * Todas as provas possuem duração fixa de 30 minutos.
+ */
+function duracao_prova(): int
 {
-    return 900 + 180 * $total_questoes;
+    return DURACAO_PROVA_SEGUNDOS;
 }
 
 /**
@@ -379,7 +392,7 @@ function registrar_prova_ativa(?int $id_card, string $titulo, array $prova): str
         'ids' => array_map('intval', array_column($prova, 'id_pergunta')),
         'prova' => $prova,
         'inicio' => time(),
-        'duracao' => duracao_prova(count($prova)),
+        'duracao' => duracao_prova(),
         'saidas' => 0,
         'cancelada' => false,
     ];

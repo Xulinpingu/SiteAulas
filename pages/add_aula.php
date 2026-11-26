@@ -34,9 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             error_log($e->getMessage());
 
-            $erro = $e->getCode() === '42S22'
-                ? 'O banco precisa da migração database/migracao_01_conteudo_aulas.sql.'
-                : 'Erro ao cadastrar a aula. Verifique os dados e tente novamente.';
+            $erro = 'Erro ao cadastrar a aula. Verifique os dados e tente novamente.';
         }
     }
 

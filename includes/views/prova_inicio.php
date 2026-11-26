@@ -32,7 +32,12 @@
                         Começar prova final <i class="ph ph-arrow-right"></i>
                     </a>
 
-                    <span class="prova-nota"><?= (int) $total_geral ?> <?= $total_geral === 1 ? 'pergunta cadastrada' : 'perguntas cadastradas' ?></span>
+                    <?php if ($admin): ?>
+                        <span class="prova-nota">
+                            <?= (int) $total_geral ?>
+                            <?= $total_geral === 1 ? 'pergunta cadastrada' : 'perguntas cadastradas' ?>
+                        </span>
+                    <?php endif; ?>
                 </div>
 
             <?php else: ?>
@@ -70,13 +75,15 @@
 
                             <div class="prova-linha-info">
                                 <strong><?= e($aula['title']) ?></strong>
-                                <span>
-                                    <?php if ($total_aula > 0): ?>
-                                        <?= $total_aula ?> <?= $total_aula === 1 ? 'pergunta' : 'perguntas' ?>
-                                    <?php else: ?>
-                                        Sem perguntas ainda
-                                    <?php endif; ?>
-                                </span>
+                                <?php if ($admin): ?>
+                                    <span>
+                                        <?php if ($total_aula > 0): ?>
+                                            <?= $total_aula ?> <?= $total_aula === 1 ? 'pergunta' : 'perguntas' ?>
+                                        <?php else: ?>
+                                            Sem perguntas ainda
+                                        <?php endif; ?>
+                                    </span>
+                                <?php endif; ?>
                             </div>
 
                             <?php if ($total_aula > 0): ?>
