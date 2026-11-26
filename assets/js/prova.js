@@ -86,12 +86,19 @@
     }
 
     function abrirAviso(titulo, mensagem, rotulo, aoConfirmar) {
+        document.querySelector('body').classList.toggle('unscrollable');
+
         dialogoTitulo.textContent = titulo;
         dialogoTexto.textContent = mensagem;
         dialogoBotao.textContent = rotulo;
         dialogoBotao.onclick = aoConfirmar;
 
         if (!dialogo.open) dialogo.showModal();
+    }
+
+    function fecharAviso() {
+        document.querySelector('body').classList.toggle('unscrollable');
+        dialogo.close();
     }
 
     // Enquanto a prova está cancelada o aviso não pode ser fechado com Esc
@@ -134,7 +141,7 @@
               ' a prova é cancelada.'
             : 'Saídas repetidas da aba cancelam a prova.';
 
-        abrirAviso('Você saiu da aba da prova', mensagem, 'Voltar à prova', () => dialogo.close());
+        abrirAviso('Você saiu da aba da prova', mensagem, 'Voltar à prova', () => fecharAviso());
     }
 
     // A saída é registrada quando a aba some e o aviso aparece quando ela volta.
