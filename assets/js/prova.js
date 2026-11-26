@@ -188,7 +188,7 @@
             el.disabled = true;
         });
 
-        // form.submit() ignora o "required" dos radios, então vai mesmo incompleta.
+        // form.submit() ignora o "required" dos radios, então vai mesmo incompleta. 
         // Questões sem resposta são corrigidas como erradas pelo servidor.
         form.submit();
     }
